@@ -7,39 +7,28 @@ import com.seleneandmana.compatoplenty.core.registry.CompatBlocks;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+import java.util.concurrent.CompletableFuture;
+
 public class ModBlockTagsProvider extends BlockTagsProvider {
-    public ModBlockTagsProvider(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generator, CompatOPlenty.MOD_ID, existingFileHelper);
+    public ModBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, ExistingFileHelper fileHelper) {
+        super(output, lookup, CompatOPlenty.MOD_ID, fileHelper);
     }
 
     @Override
-    public void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         //Minecraft tags
         tag(BlockTags.MINEABLE_WITH_AXE).add(
-                CompatBlocks.CHERRY_VERTICAL_SLAB.get(),
-                CompatBlocks.CHERRY_BOOKSHELF.get(),
-                CompatBlocks.CHERRY_LADDER.get(),
-                CompatBlocks.STRIPPED_CHERRY_POST.get(),
-                CompatBlocks.CHERRY_POST.get(),
-                CompatBlocks.WHITE_CHERRY_HEDGE.get(),
-                CompatBlocks.PINK_CHERRY_HEDGE.get(),
-                CompatBlocks.CHERRY_BEEHIVE.get(),
-                CompatBlocks.CHERRY_CABINET.get(),
-                CompatBlocks.CHERRY_TABLE.get(),
-                CompatBlocks.VERTICAL_CHERRY_PLANKS.get(),
-                CompatBlocks.CHERRY_BOARDS.get(),
-                getNormalChest(CompatBlocks.CHERRY_CHESTS),
-                getTrappedChest(CompatBlocks.CHERRY_CHESTS),
+          //      CompatBlocks.WHITE_CHERRY_HEDGE.get(),
 
                 CompatBlocks.JACARANDA_VERTICAL_SLAB.get(),
                 CompatBlocks.JACARANDA_BOOKSHELF.get(),
@@ -191,8 +180,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
 
         tag(BlockTags.MINEABLE_WITH_HOE).add(
-                CompatBlocks.WHITE_CHERRY_LEAF_CARPET.get(),
-                CompatBlocks.PINK_CHERRY_LEAF_CARPET.get(),
+             //   CompatBlocks.WHITE_CHERRY_LEAF_CARPET.get(),
                 CompatBlocks.JACARANDA_LEAF_CARPET.get(),
                 CompatBlocks.FIR_LEAF_CARPET.get(),
                 CompatBlocks.REDWOOD_LEAF_CARPET.get(),
@@ -210,8 +198,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 CompatBlocks.ORANGE_AUTUMN_LEAF_CARPET.get(),
                 CompatBlocks.YELLOW_AUTUMN_LEAF_CARPET.get(),
 
-                CompatBlocks.WHITE_CHERRY_LEAF_PILE.get(),
-                CompatBlocks.PINK_CHERRY_LEAF_PILE.get(),
+          //      CompatBlocks.WHITE_CHERRY_LEAF_PILE.get(),
                 CompatBlocks.JACARANDA_LEAF_PILE.get(),
                 CompatBlocks.FIR_LEAF_PILE.get(),
                 CompatBlocks.REDWOOD_LEAF_PILE.get(),
@@ -278,7 +265,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
 
         tag(BlockTags.BEEHIVES).add(
-                CompatBlocks.CHERRY_BEEHIVE.get(),
                 CompatBlocks.JACARANDA_BEEHIVE.get(),
                 CompatBlocks.FIR_BEEHIVE.get(),
                 CompatBlocks.REDWOOD_BEEHIVE.get(),
@@ -292,7 +278,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
 
         tag(BlockTags.CLIMBABLE).add(
-                CompatBlocks.CHERRY_LADDER.get(),
                 CompatBlocks.JACARANDA_LADDER.get(),
                 CompatBlocks.FIR_LADDER.get(),
                 CompatBlocks.REDWOOD_LADDER.get(),
@@ -345,7 +330,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
 
         tag(BlockTags.PLANKS).add(
-                CompatBlocks.VERTICAL_CHERRY_PLANKS.get(),
                 CompatBlocks.VERTICAL_JACARANDA_PLANKS.get(),
                 CompatBlocks.VERTICAL_FIR_PLANKS.get(),
                 CompatBlocks.VERTICAL_REDWOOD_PLANKS.get(),
@@ -366,7 +350,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         //Forge Tags
         tag(Tags.Blocks.CHESTS_WOODEN).add(
-                getNormalChest(CompatBlocks.CHERRY_CHESTS),
                 getNormalChest(CompatBlocks.JACARANDA_CHESTS),
                 getNormalChest(CompatBlocks.FIR_CHESTS),
                 getNormalChest(CompatBlocks.REDWOOD_CHESTS),
@@ -378,7 +361,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 getNormalChest(CompatBlocks.PALM_CHESTS),
                 getNormalChest(CompatBlocks.HELLBARK_CHESTS),
 
-                getTrappedChest(CompatBlocks.CHERRY_CHESTS),
                 getTrappedChest(CompatBlocks.JACARANDA_CHESTS),
                 getTrappedChest(CompatBlocks.FIR_CHESTS),
                 getTrappedChest(CompatBlocks.REDWOOD_CHESTS),
@@ -392,7 +374,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
 
         tag(Tags.Blocks.CHESTS_TRAPPED).add(
-                getTrappedChest(CompatBlocks.CHERRY_CHESTS),
                 getTrappedChest(CompatBlocks.JACARANDA_CHESTS),
                 getTrappedChest(CompatBlocks.FIR_CHESTS),
                 getTrappedChest(CompatBlocks.REDWOOD_CHESTS),
@@ -406,6 +387,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
 
         //Other Tags
+        /* TODO remove
         tag(BlueprintBlockTags.HEDGES).add(
                 CompatBlocks.WHITE_CHERRY_HEDGE.get(),
                 CompatBlocks.PINK_CHERRY_HEDGE.get(),
@@ -426,9 +408,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 CompatBlocks.ORANGE_AUTUMN_HEDGE.get(),
                 CompatBlocks.YELLOW_AUTUMN_HEDGE.get()
         );
+         */
 
         tag(BlueprintBlockTags.LADDERS).add(
-                CompatBlocks.CHERRY_LADDER.get(),
                 CompatBlocks.JACARANDA_LADDER.get(),
                 CompatBlocks.FIR_LADDER.get(),
                 CompatBlocks.REDWOOD_LADDER.get(),
@@ -441,6 +423,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 CompatBlocks.HELLBARK_LADDER.get()
         );
 
+        /* TODO remove
         tag(BlueprintBlockTags.VERTICAL_SLABS).add(
                 CompatBlocks.CHERRY_VERTICAL_SLAB.get(),
                 CompatBlocks.JACARANDA_VERTICAL_SLAB.get(),
@@ -474,10 +457,10 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 CompatBlocks.POLISHED_ROSE_QUARTZ_VERTICAL_SLAB.get(),
                 CompatBlocks.POLISHED_ROSE_QUARTZ_BRICK_VERTICAL_SLAB.get()
         );
+         */
 
         tag(BlueprintBlockTags.LEAF_PILES).add(
-                CompatBlocks.WHITE_CHERRY_LEAF_PILE.get(),
-                CompatBlocks.PINK_CHERRY_LEAF_PILE.get(),
+             //   CompatBlocks.WHITE_CHERRY_LEAF_PILE.get(),
                 CompatBlocks.JACARANDA_LEAF_PILE.get(),
                 CompatBlocks.FIR_LEAF_PILE.get(),
                 CompatBlocks.REDWOOD_LEAF_PILE.get(),

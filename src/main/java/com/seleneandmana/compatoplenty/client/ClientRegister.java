@@ -18,16 +18,9 @@ public class ClientRegister {
     }
 
     public static void setupRenderLayer() {
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.CHERRY_LADDER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.CHERRY_POST.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.STRIPPED_CHERRY_POST.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_HEDGE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.PINK_CHERRY_HEDGE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_LEAF_CARPET.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.PINK_CHERRY_LEAF_CARPET.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_LEAF_PILE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.PINK_CHERRY_LEAF_PILE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CompatBlocks.CHERRY_TABLE.get(), RenderType.cutout());
+     //   ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_HEDGE.get(), RenderType.cutout());
+     //   ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_LEAF_CARPET.get(), RenderType.cutout());
+     //   ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_LEAF_PILE.get(), RenderType.cutout());
 
         ItemBlockRenderTypes.setRenderLayer(CompatBlocks.JACARANDA_LADDER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CompatBlocks.JACARANDA_POST.get(), RenderType.cutout());

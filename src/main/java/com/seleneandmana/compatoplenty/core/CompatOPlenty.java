@@ -9,6 +9,7 @@ import com.seleneandmana.compatoplenty.core.other.CompatCompat;
 import com.seleneandmana.compatoplenty.core.registry.util.CompatBlockSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -30,6 +31,7 @@ public class CompatOPlenty {
     public static final String TWIGS_ID = "twigs";
     public static final String FARMERS_ID = "farmersdelight";
     public static final String BOATLOAD_ID = "boatload";
+    public static final String VSLAB_ID = "v_slab_compat";
 
 
     public static final Logger LOGGER = LogManager.getLogger();
@@ -49,14 +51,15 @@ public class CompatOPlenty {
     public void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper fileHelper = event.getExistingFileHelper();
+        PackOutput output = generator.getPackOutput();
 
-        ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(generator, fileHelper);
+        ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(output, event.getLookupProvider(), fileHelper);
         generator.addProvider(event.includeServer(), modBlockTagsProvider);
-        generator.addProvider(event.includeServer(), new ModItemTagsProvider(generator, modBlockTagsProvider, fileHelper));
-        generator.addProvider(event.includeServer(), new ModLootTableProvider(generator));
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(generator));
+        generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, event.getLookupProvider(), modBlockTagsProvider.contentsGetter(), fileHelper));
+        generator.addProvider(event.includeServer(), new ModLootTableProvider(output));
+        generator.addProvider(event.includeServer(), new ModRecipeProvider(output));
 
-        generator.addProvider(event.includeClient(), new ModLanguageProvider(generator));
+        generator.addProvider(event.includeClient(), new ModLanguageProvider(output));
     }
 
     private void compatSetup(FMLCommonSetupEvent event) {

@@ -3,18 +3,17 @@ package com.seleneandmana.compatoplenty.core.data.client;
 import com.seleneandmana.compatoplenty.core.CompatOPlenty;
 import com.seleneandmana.compatoplenty.core.registry.CompatBlocks;
 import com.seleneandmana.compatoplenty.core.registry.CompatItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class ModLanguageProvider extends LanguageProvider {
-    public ModLanguageProvider(DataGenerator gen) {
-        super(gen, CompatOPlenty.MOD_ID, "en_us");
+    public ModLanguageProvider(PackOutput output) {
+        super(output, CompatOPlenty.MOD_ID, "en_us");
     }
 
     @Override
     protected void addTranslations() {
         //Vertical Slabs
-        add(CompatBlocks.CHERRY_VERTICAL_SLAB.get(), "Cherry Vertical Slab");
         add(CompatBlocks.JACARANDA_VERTICAL_SLAB.get(), "Jacaranda Vertical Slab");
         add(CompatBlocks.FIR_VERTICAL_SLAB.get(), "Fir Vertical Slab");
         add(CompatBlocks.REDWOOD_VERTICAL_SLAB.get(), "Redwood Vertical Slab");
@@ -42,7 +41,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.POLISHED_ROSE_QUARTZ_BRICK_VERTICAL_SLAB.get(), "Polished Rose Quartz Brick Vertical Slab");
 
         //Bookshelves
-        add(CompatBlocks.CHERRY_BOOKSHELF.get(), "Cherry Bookshelf");
         add(CompatBlocks.JACARANDA_BOOKSHELF.get(), "Jacaranda Bookshelf");
         add(CompatBlocks.FIR_BOOKSHELF.get(), "Fir Bookshelf");
         add(CompatBlocks.REDWOOD_BOOKSHELF.get(), "Redwood Bookshelf");
@@ -55,7 +53,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.HELLBARK_BOOKSHELF.get(), "Hellbark Bookshelf");
 
         //Ladders
-        add(CompatBlocks.CHERRY_LADDER.get(), "Cherry Ladder");
         add(CompatBlocks.JACARANDA_LADDER.get(), "Jacaranda Ladder");
         add(CompatBlocks.FIR_LADDER.get(), "Fir Ladder");
         add(CompatBlocks.REDWOOD_LADDER.get(), "Redwood Ladder");
@@ -68,7 +65,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.HELLBARK_LADDER.get(), "Hellbark Ladder");
 
         //Posts
-        add(CompatBlocks.CHERRY_POST.get(), "Cherry Post");
         add(CompatBlocks.JACARANDA_POST.get(), "Jacaranda Post");
         add(CompatBlocks.FIR_POST.get(), "Fir Post");
         add(CompatBlocks.REDWOOD_POST.get(), "Redwood Post");
@@ -81,7 +77,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.HELLBARK_POST.get(), "Hellbark Post");
 
         //Stripped Posts
-        add(CompatBlocks.STRIPPED_CHERRY_POST.get(), "Stripped Cherry Post");
         add(CompatBlocks.STRIPPED_JACARANDA_POST.get(), "Stripped Jacaranda Post");
         add(CompatBlocks.STRIPPED_FIR_POST.get(), "Stripped Fir Post");
         add(CompatBlocks.STRIPPED_REDWOOD_POST.get(), "Stripped Redwood Post");
@@ -94,8 +89,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.STRIPPED_HELLBARK_POST.get(), "Stripped Hellbark Post");
 
         //Leaf Hedges
-        add(CompatBlocks.WHITE_CHERRY_HEDGE.get(), "White Cherry Leaf Hedge");
-        add(CompatBlocks.PINK_CHERRY_HEDGE.get(), "Pink Cherry Leaf Hedge");
         add(CompatBlocks.JACARANDA_HEDGE.get(), "Jacaranda Leaf Hedge");
         add(CompatBlocks.FIR_HEDGE.get(), "Fir Leaf Hedge");
         add(CompatBlocks.REDWOOD_HEDGE.get(), "Redwood Leaf Hedge");
@@ -114,8 +107,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.YELLOW_AUTUMN_HEDGE.get(), "Yellow Autumn Leaf Hedge");
 
         //Leaf Carpets
-        add(CompatBlocks.WHITE_CHERRY_LEAF_CARPET.get(), "White Cherry Leaf Carpet");
-        add(CompatBlocks.PINK_CHERRY_LEAF_CARPET.get(), "Pink Cherry Leaf Carpet");
         add(CompatBlocks.JACARANDA_LEAF_CARPET.get(), "Jacaranda Leaf Carpet");
         add(CompatBlocks.FIR_LEAF_CARPET.get(), "Fir Leaf Carpet");
         add(CompatBlocks.REDWOOD_LEAF_CARPET.get(), "Redwood Leaf Carpet");
@@ -134,8 +125,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.YELLOW_AUTUMN_LEAF_CARPET.get(), "Yellow Autumn Leaf Carpet");
 
         //Leaf Piles
-        add(CompatBlocks.WHITE_CHERRY_LEAF_PILE.get(), "Pile of White Cherry Leaves]");
-        add(CompatBlocks.PINK_CHERRY_LEAF_PILE.get(), "Pile of Pink Cherry Leaves");
         add(CompatBlocks.JACARANDA_LEAF_PILE.get(), "Pile of Jacaranda Leaves");
         add(CompatBlocks.FIR_LEAF_PILE.get(), "Pile of Fir Leaves");
         add(CompatBlocks.REDWOOD_LEAF_PILE.get(), "Pile of Redwood Leaves");
@@ -154,7 +143,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.YELLOW_AUTUMN_LEAF_PILE.get(), "Pile of Yellow Autumn Leaves");
 
         //Chests
-        add(CompatBlocks.CHERRY_CHESTS.getFirst().get(), "Cherry Chest");
         add(CompatBlocks.JACARANDA_CHESTS.getFirst().get(), "Jacaranda Chest");
         add(CompatBlocks.FIR_CHESTS.getFirst().get(), "Fir Chest");
         add(CompatBlocks.REDWOOD_CHESTS.getFirst().get(), "Redwood Chest");
@@ -167,7 +155,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.HELLBARK_CHESTS.getFirst().get(), "Hellbark Chest");
 
         //Trapped Chests
-        add(CompatBlocks.CHERRY_CHESTS.getSecond().get(), "Cherry Trapped Chest");
         add(CompatBlocks.JACARANDA_CHESTS.getSecond().get(), "Jacaranda Trapped Chest");
         add(CompatBlocks.FIR_CHESTS.getSecond().get(), "Fir Trapped Chest");
         add(CompatBlocks.REDWOOD_CHESTS.getSecond().get(), "Redwood Trapped Chest");
@@ -180,7 +167,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.HELLBARK_CHESTS.getSecond().get(), "Hellbark Trapped Chest");
 
         //Beehives
-        add(CompatBlocks.CHERRY_BEEHIVE.get(), "Cherry Beehive");
         add(CompatBlocks.JACARANDA_BEEHIVE.get(), "Jacaranda Beehive");
         add(CompatBlocks.FIR_BEEHIVE.get(), "Fir Beehive");
         add(CompatBlocks.REDWOOD_BEEHIVE.get(), "Redwood Beehive");
@@ -193,7 +179,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.HELLBARK_BEEHIVE.get(), "Hellbark Beehive");
 
         //Cabinets
-        add(CompatBlocks.CHERRY_CABINET.get(), "Cherry Cabinet");
         add(CompatBlocks.JACARANDA_CABINET.get(), "Jacaranda Cabinet");
         add(CompatBlocks.FIR_CABINET.get(), "Fir Cabinet");
         add(CompatBlocks.REDWOOD_CABINET.get(), "Redwood Cabinet");
@@ -206,7 +191,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.HELLBARK_CABINET.get(), "Hellbark Cabinet");
 
         //Tables
-        add(CompatBlocks.CHERRY_TABLE.get(), "Cherry Table");
         add(CompatBlocks.JACARANDA_TABLE.get(), "Jacaranda Table");
         add(CompatBlocks.FIR_TABLE.get(), "Fir Table");
         add(CompatBlocks.REDWOOD_TABLE.get(), "Redwood Table");
@@ -219,7 +203,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.HELLBARK_TABLE.get(), "Hellbark Table");
 
         //Vertical Planks
-        add(CompatBlocks.VERTICAL_CHERRY_PLANKS.get(), "Vertical Cherry Planks");
         add(CompatBlocks.VERTICAL_JACARANDA_PLANKS.get(), "Vertical Jacaranda Planks");
         add(CompatBlocks.VERTICAL_FIR_PLANKS.get(), "Vertical Fir Planks");
         add(CompatBlocks.VERTICAL_REDWOOD_PLANKS.get(), "Vertical Redwood Planks");
@@ -233,7 +216,6 @@ public class ModLanguageProvider extends LanguageProvider {
 
         //Boards
         //Tables
-        add(CompatBlocks.CHERRY_BOARDS.get(), "Cherry Boards");
         add(CompatBlocks.JACARANDA_BOARDS.get(), "Jacaranda Boards");
         add(CompatBlocks.FIR_BOARDS.get(), "Fir Boards");
         add(CompatBlocks.REDWOOD_BOARDS.get(), "Redwood Boards");
@@ -277,7 +259,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.CHISELED_POLISHED_ROSE_QUARTZ.get(), "Chiseled Polished Rose Quartz");
 
         //Furnace Boats
-        add(CompatItems.CHERRY_FURNACE_BOAT.get(), "Cherry Boat with Furnace");
         add(CompatItems.JACARANDA_FURNACE_BOAT.get(), "Jacaranda Boat with Furnace");
         add(CompatItems.FIR_FURNACE_BOAT.get(), "Fir Boat with Furnace");
         add(CompatItems.REDWOOD_FURNACE_BOAT.get(), "Redwood Boat with Furnace");
@@ -290,7 +271,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatItems.HELLBARK_FURNACE_BOAT.get(), "Hellbark Boat with Furnace");
 
         //Large Boats
-        add(CompatItems.LARGE_CHERRY_BOAT.get(), "Large Cherry Boat");
         add(CompatItems.LARGE_JACARANDA_BOAT.get(), "Large Jacaranda Boat");
         add(CompatItems.LARGE_FIR_BOAT.get(), "Large Fir Boat");
         add(CompatItems.LARGE_REDWOOD_BOAT.get(), "Large Redwood Boat");

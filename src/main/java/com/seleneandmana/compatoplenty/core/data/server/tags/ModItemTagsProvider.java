@@ -8,9 +8,10 @@ import com.seleneandmana.compatoplenty.core.registry.CompatItems;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,13 +20,15 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class ModItemTagsProvider extends ItemTagsProvider {
-    public ModItemTagsProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(dataGenerator, blockTagsProvider, CompatOPlenty.MOD_ID, existingFileHelper);
+    public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, CompletableFuture<TagsProvider.TagLookup<Block>> tagLookup, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookup, tagLookup, CompatOPlenty.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         //Minecraft
         tag(ItemTags.SLABS).add(
                 asItem(CompatBlocks.BLACK_SANDSTONE_BRICK_SLAB),
@@ -53,7 +56,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         );
 
         tag(ItemTags.PLANKS).add(
-                asItem(CompatBlocks.VERTICAL_CHERRY_PLANKS),
                 asItem(CompatBlocks.VERTICAL_JACARANDA_PLANKS),
                 asItem(CompatBlocks.VERTICAL_FIR_PLANKS),
                 asItem(CompatBlocks.VERTICAL_REDWOOD_PLANKS),
@@ -81,7 +83,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         //Forge Tags
         tag(Tags.Items.CHESTS_WOODEN).add(
-                getNormalChest(CompatBlocks.CHERRY_CHESTS),
                 getNormalChest(CompatBlocks.JACARANDA_CHESTS),
                 getNormalChest(CompatBlocks.FIR_CHESTS),
                 getNormalChest(CompatBlocks.REDWOOD_CHESTS),
@@ -95,7 +96,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         );
 
         tag(Tags.Items.CHESTS_TRAPPED).add(
-                getTrappedChest(CompatBlocks.CHERRY_CHESTS),
                 getTrappedChest(CompatBlocks.JACARANDA_CHESTS),
                 getTrappedChest(CompatBlocks.FIR_CHESTS),
                 getTrappedChest(CompatBlocks.REDWOOD_CHESTS),
@@ -109,7 +109,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         );
 
         tag(Tags.Items.BOOKSHELVES).add(
-                asItem(CompatBlocks.CHERRY_BOOKSHELF),
                 asItem(CompatBlocks.JACARANDA_BOOKSHELF),
                 asItem(CompatBlocks.FIR_BOOKSHELF),
                 asItem(CompatBlocks.REDWOOD_BOOKSHELF),
@@ -123,6 +122,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         );
 
         //Other Tags
+        /* TODO remove
         tag(BlueprintItemTags.BOATABLE_CHESTS).add(
                 getNormalChest(CompatBlocks.CHERRY_CHESTS),
                 getNormalChest(CompatBlocks.JACARANDA_CHESTS),
@@ -136,9 +136,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 getNormalChest(CompatBlocks.PALM_CHESTS),
                 getNormalChest(CompatBlocks.HELLBARK_CHESTS)
         );
+         */
 
         tag(BlueprintItemTags.LADDERS).add(
-                asItem(CompatBlocks.CHERRY_LADDER),
                 asItem(CompatBlocks.JACARANDA_LADDER),
                 asItem(CompatBlocks.FIR_LADDER),
                 asItem(CompatBlocks.REDWOOD_LADDER),
@@ -151,6 +151,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 asItem(CompatBlocks.HELLBARK_LADDER)
         );
 
+        /* TODO remove
         tag(BlueprintItemTags.REVERTABLE_CHESTS).add(
                 getNormalChest(CompatBlocks.CHERRY_CHESTS),
                 getNormalChest(CompatBlocks.JACARANDA_CHESTS),
@@ -198,6 +199,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 asItem(CompatBlocks.POLISHED_ROSE_QUARTZ_VERTICAL_SLAB),
                 asItem(CompatBlocks.POLISHED_ROSE_QUARTZ_BRICK_VERTICAL_SLAB)
         );
+        */
     }
 
     public static Item asItem(RegistryObject<Block> block) {

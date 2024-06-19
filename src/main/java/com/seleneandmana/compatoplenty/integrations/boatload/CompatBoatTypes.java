@@ -13,7 +13,6 @@ import net.minecraft.world.item.Item;
 import java.util.function.Supplier;
 
 public class CompatBoatTypes {
-    public static final BoatloadBoatType CHERRY = BoatloadBoatType.register(BoatloadBoatType.create(new ResourceLocation(CompatOPlenty.MOD_ID, "cherry"), () -> BOPBlocks.CHERRY_PLANKS.get().asItem(), () -> BOPItems.CHERRY_BOAT.get(), () -> BOPItems.CHERRY_CHEST_BOAT.get(), () -> CompatItems.CHERRY_FURNACE_BOAT.get(), () -> CompatItems.LARGE_CHERRY_BOAT.get()));
     public static final BoatloadBoatType JACARANDA = BoatloadBoatType.register(BoatloadBoatType.create(new ResourceLocation(CompatOPlenty.MOD_ID, "jacaranda"), () -> BOPBlocks.JACARANDA_PLANKS.get().asItem(), () -> BOPItems.JACARANDA_BOAT.get(), () -> BOPItems.JACARANDA_CHEST_BOAT.get(), () -> CompatItems.JACARANDA_FURNACE_BOAT.get(), () -> CompatItems.LARGE_JACARANDA_BOAT.get()));
     public static final BoatloadBoatType FIR = BoatloadBoatType.register(BoatloadBoatType.create(new ResourceLocation(CompatOPlenty.MOD_ID, "fir"), () -> BOPBlocks.FIR_PLANKS.get().asItem(), () -> BOPItems.FIR_BOAT.get(), () -> BOPItems.FIR_CHEST_BOAT.get(), () -> CompatItems.FIR_FURNACE_BOAT.get(), () -> CompatItems.LARGE_FIR_BOAT.get()));
     public static final BoatloadBoatType REDWOOD = BoatloadBoatType.register(BoatloadBoatType.create(new ResourceLocation(CompatOPlenty.MOD_ID, "redwood"), () -> BOPBlocks.REDWOOD_PLANKS.get().asItem(), () -> BOPItems.REDWOOD_BOAT.get(), () -> BOPItems.REDWOOD_CHEST_BOAT.get(), () -> CompatItems.REDWOOD_FURNACE_BOAT.get(), () -> CompatItems.LARGE_REDWOOD_BOAT.get()));
@@ -26,7 +25,6 @@ public class CompatBoatTypes {
     public static final BoatloadBoatType HELLBARK = BoatloadBoatType.register(BoatloadBoatType.create(new ResourceLocation(CompatOPlenty.MOD_ID, "hellbark"), () -> BOPBlocks.HELLBARK_PLANKS.get().asItem(), () -> BOPItems.HELLBARK_BOAT.get(), () -> BOPItems.HELLBARK_CHEST_BOAT.get(), () -> CompatItems.HELLBARK_FURNACE_BOAT.get(), () -> CompatItems.LARGE_HELLBARK_BOAT.get()));
 
     //Furnace Boats
-    public static final Supplier<Item> CHERRY_FURNACE_BOAT = () -> new FurnaceBoatItem(CHERRY);
     public static final Supplier<Item> JACARANDA_FURNACE_BOAT = () -> new FurnaceBoatItem(JACARANDA);
     public static final Supplier<Item> FIR_FURNACE_BOAT = () -> new FurnaceBoatItem(FIR);
     public static final Supplier<Item> REDWOOD_FURNACE_BOAT = () -> new FurnaceBoatItem(REDWOOD);
@@ -39,7 +37,6 @@ public class CompatBoatTypes {
     public static final Supplier<Item> HELLBARK_FURNACE_BOAT = () -> new FurnaceBoatItem(HELLBARK);
 
     //Large Boats
-    public static final Supplier<Item> LARGE_CHERRY_BOAT = () -> new LargeBoatItem(CHERRY);
     public static final Supplier<Item> LARGE_JACARANDA_BOAT = () -> new LargeBoatItem(JACARANDA);
     public static final Supplier<Item> LARGE_FIR_BOAT = () -> new LargeBoatItem(FIR);
     public static final Supplier<Item> LARGE_REDWOOD_BOAT = () -> new LargeBoatItem(REDWOOD);
