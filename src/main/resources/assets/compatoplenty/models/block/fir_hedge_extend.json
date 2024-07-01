@@ -1,5 +1,5 @@
 {
-  "parent": "blueprint:block/hedge_extend",
+  "parent": "quark:block/hedge_extend",
   "textures": {
     "leaf": "biomesoplenty:block/fir_leaves"
   }

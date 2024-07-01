@@ -1,5 +1,5 @@
 {
-  "parent": "blueprint:block/hedge_side",
+  "parent": "quark:block/hedge_side",
   "textures": {
     "leaf": "biomesoplenty:block/willow_leaves"
   }

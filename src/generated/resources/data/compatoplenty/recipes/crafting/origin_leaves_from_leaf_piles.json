@@ -4,7 +4,7 @@
     {
       "conditions": [
         {
-          "type": "blueprint:and",
+          "type": "forge:and",
           "values": [
             {
               "type": "forge:mod_loaded",
@@ -19,10 +19,11 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "leaves",
         "key": {
           "#": {
-            "item": "compatoplenty:origin_leaf_pile"
+            "item": "compatoplenty:origin_leaf_leaf_pile"
           }
         },
         "pattern": [
@@ -31,7 +32,8 @@
         ],
         "result": {
           "item": "biomesoplenty:origin_leaves"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

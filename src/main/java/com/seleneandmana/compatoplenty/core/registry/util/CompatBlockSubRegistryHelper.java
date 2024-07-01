@@ -1,6 +1,7 @@
 package com.seleneandmana.compatoplenty.core.registry.util;
 
 import com.mojang.datafixers.util.Pair;
+import com.teamabnormals.blueprint.client.BlueprintChestMaterials;
 import com.teamabnormals.blueprint.client.renderer.block.ChestBlockEntityWithoutLevelRenderer;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
@@ -19,32 +20,37 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.RegistryObject;
+import org.violetmoon.quark.base.util.TriFunction;
+
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 public class CompatBlockSubRegistryHelper extends BlockSubRegistryHelper {
     public CompatBlockSubRegistryHelper(RegistryHelper parent) {
         super(parent);
     }
 
-    public Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> createUnburnableChestBlocks(String name, MapColor color) {
+    private Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> createChestBlocks(String name, MapColor color, TriFunction<Item, Block, Item.Properties, Supplier<Callable<BEWLRBlockItem.LazyBEWLR>>> itemFunction) {
         String modId = this.parent.getModId();
         String chestName = name + "_chest";
         String trappedChestName = name + "_trapped_chest";
-        RegistryObject<BlueprintChestBlock> chest = this.deferredRegister.register(chestName, () -> new BlueprintChestBlock(modId + ":" + name, Block.Properties.of().mapColor(color).strength(2.5F).sound(SoundType.WOOD)));
+        RegistryObject<BlueprintChestBlock> chest = this.deferredRegister.register(chestName, () -> new BlueprintChestBlock(modId + ":" + name + "_normal", Block.Properties.of().mapColor(color).strength(2.5F).sound(SoundType.WOOD)));
         RegistryObject<BlueprintTrappedChestBlock> trappedChest = this.deferredRegister.register(trappedChestName, () -> new BlueprintTrappedChestBlock(modId + ":" + name + "_trapped", Block.Properties.of().mapColor(color).strength(2.5F).sound(SoundType.WOOD)));
-        this.itemRegister.register(chestName, () -> new BEWLRBlockItem(chest.get(), new Item.Properties(), () -> () -> chestBEWLR(false)));
-        this.itemRegister.register(trappedChestName, () -> new BEWLRBlockItem(trappedChest.get(), new Item.Properties(), () -> () -> chestBEWLR(true)));
+        this.itemRegister.register(chestName, () -> itemFunction.apply(chest.get(), new Item.Properties(), () -> () -> chestBEWLR(false)));
+        this.itemRegister.register(trappedChestName, () -> itemFunction.apply(trappedChest.get(), new Item.Properties(), () -> () -> chestBEWLR(true)));
+
+        BlueprintChestMaterials.registerMaterials(modId, name, false);
+        BlueprintChestMaterials.registerMaterials(modId, name, true);
+
         return Pair.of(chest, trappedChest);
     }
 
+    public Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> createUnburnableChestBlocks(String name, MapColor color) {
+        return createChestBlocks(name, color, BEWLRBlockItem::new);
+    }
+
     public Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> createChestBlocks(String name, MapColor color) {
-        String modId = this.parent.getModId();
-        String chestName = name + "_chest";
-        String trappedChestName = name + "_trapped_chest";
-        RegistryObject<BlueprintChestBlock> chest = this.deferredRegister.register(chestName, () -> new BlueprintChestBlock(modId + ":" + name, Block.Properties.of().mapColor(color).strength(2.5F).sound(SoundType.WOOD)));
-        RegistryObject<BlueprintTrappedChestBlock> trappedChest = this.deferredRegister.register(trappedChestName, () -> new BlueprintTrappedChestBlock(modId + ":" + name + "_trapped", Block.Properties.of().mapColor(color).strength(2.5F).sound(SoundType.WOOD)));
-        this.itemRegister.register(chestName, () -> new BEWLRFuelBlockItem(chest.get(), new Item.Properties(), () -> () -> chestBEWLR(false), 300));
-        this.itemRegister.register(trappedChestName, () -> new BEWLRFuelBlockItem(trappedChest.get(), new Item.Properties(), () -> () -> chestBEWLR(true), 300));
-        return Pair.of(chest, trappedChest);
+        return createChestBlocks(name, color, (b, p, r) -> new BEWLRFuelBlockItem(b, p, r, 300));
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -15,6 +15,7 @@ import com.seleneandmana.compatoplenty.core.CompatOPlenty;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.BOATLOAD_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.QUARK_ID;
@@ -48,6 +49,10 @@ public class CompatItems {
     public static final RegistryObject<Item> LARGE_UMBRAN_BOAT = HELPER.createItem("large_umbran_boat", ItemSubRegistryHelper.areModsLoaded(BOATLOAD_ID) ? CompatBoatTypes.LARGE_UMBRAN_BOAT : () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LARGE_PALM_BOAT = HELPER.createItem("large_palm_boat", ItemSubRegistryHelper.areModsLoaded(BOATLOAD_ID) ? CompatBoatTypes.LARGE_PALM_BOAT : () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LARGE_HELLBARK_BOAT = HELPER.createItem("large_hellbark_boat", ItemSubRegistryHelper.areModsLoaded(BOATLOAD_ID) ? CompatBoatTypes.LARGE_HELLBARK_BOAT : () -> new Item(new Item.Properties()));
+
+    public static Predicate<ItemStack> of(Supplier<? extends ItemLike> item) {
+        return it -> it.is(item.get().asItem());
+    }
 
     public static Predicate<ItemStack> of(ItemLike item) {
         return it -> it.is(item.asItem());
@@ -83,7 +88,7 @@ public class CompatItems {
                         LARGE_HELLBARK_BOAT
                 )
                 .tab(CreativeModeTabs.INGREDIENTS)
-                .addItemsAfter(of(Items.CLAY_BALL).and(anyModLoaded(QUARK_ID)));
+                .addItemsAfter(of(Items.CLAY_BALL).and(anyModLoaded(QUARK_ID)), GLOWING_MOSS_PASTE);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.seleneandmana.compatoplenty.core;
 
+import com.seleneandmana.compatoplenty.core.data.client.ModBlockModelsProvider;
 import com.seleneandmana.compatoplenty.core.data.client.ModLanguageProvider;
 import com.seleneandmana.compatoplenty.core.data.server.ModLootTableProvider;
 import com.seleneandmana.compatoplenty.core.data.server.ModRecipeProvider;
@@ -26,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = CompatOPlenty.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CompatOPlenty {
     public static final String MOD_ID = "compatoplenty";
+    public static final String BOP_ID = "biomesoplenty";
     public static final String QUARK_ID = "quark";
     public static final String WOODWORKS_ID = "woodworks";
     public static final String TWIGS_ID = "twigs";
@@ -60,6 +62,7 @@ public class CompatOPlenty {
         generator.addProvider(event.includeServer(), new ModRecipeProvider(output));
 
         generator.addProvider(event.includeClient(), new ModLanguageProvider(output));
+        generator.addProvider(event.includeClient(), new ModBlockModelsProvider(output, fileHelper));
     }
 
     private void compatSetup(FMLCommonSetupEvent event) {

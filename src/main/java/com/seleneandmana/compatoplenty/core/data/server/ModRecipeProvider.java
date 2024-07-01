@@ -9,7 +9,6 @@ import com.seleneandmana.compatoplenty.core.registry.CompatBlocks;
 import com.seleneandmana.compatoplenty.core.registry.CompatItems;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
-import com.teamabnormals.blueprint.core.api.conditions.BlueprintAndCondition;
 import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.woodworks.core.WoodworksConfig;
@@ -29,7 +28,6 @@ import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.AndCondition;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
-import net.minecraftforge.common.crafting.conditions.OrCondition;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -39,8 +37,6 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.function.Consumer;
 
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.QUARK_ID;
@@ -59,16 +55,16 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
 
         //Vertical Slabs
-        verticalSlabRecipe(BOPBlocks.JACARANDA_SLAB.get(), CompatBlocks.JACARANDA_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.FIR_SLAB.get(), CompatBlocks.FIR_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.REDWOOD_SLAB.get(), CompatBlocks.REDWOOD_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.MAHOGANY_SLAB.get(), CompatBlocks.MAHOGANY_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.WILLOW_SLAB.get(), CompatBlocks.WILLOW_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.MAGIC_SLAB.get(), CompatBlocks.MAGIC_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.DEAD_SLAB.get(), CompatBlocks.DEAD_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.UMBRAN_SLAB.get(), CompatBlocks.UMBRAN_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.PALM_SLAB.get(), CompatBlocks.PALM_VERTICAL_SLAB.get(), consumer);
-        verticalSlabRecipe(BOPBlocks.HELLBARK_SLAB.get(), CompatBlocks.HELLBARK_VERTICAL_SLAB.get(), consumer);
+        verticalSlabRecipe(BOPBlocks.JACARANDA_SLAB.get(), CompatBlocks.JACARANDA.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.FIR_SLAB.get(), CompatBlocks.FIR.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.REDWOOD_SLAB.get(), CompatBlocks.REDWOOD.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.MAHOGANY_SLAB.get(), CompatBlocks.MAHOGANY.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.WILLOW_SLAB.get(), CompatBlocks.WILLOW.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.MAGIC_SLAB.get(), CompatBlocks.MAGIC.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.DEAD_SLAB.get(), CompatBlocks.DEAD.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.UMBRAN_SLAB.get(), CompatBlocks.UMBRAN.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.PALM_SLAB.get(), CompatBlocks.PALM.verticalSlab().get(), consumer);
+        verticalSlabRecipe(BOPBlocks.HELLBARK_SLAB.get(), CompatBlocks.HELLBARK.verticalSlab().get(), consumer);
 
         verticalSlabRecipe(BOPBlocks.BLACK_SANDSTONE_SLAB.get(), CompatBlocks.BLACK_SANDSTONE_VERTICAL_SLAB.get(), consumer);
         verticalSlabRecipe(BOPBlocks.CUT_BLACK_SANDSTONE_SLAB.get(), CompatBlocks.CUT_BLACK_SANDSTONE_VERTICAL_SLAB.get(), consumer);
@@ -91,152 +87,152 @@ public class ModRecipeProvider extends RecipeProvider {
         verticalSlabRecipe(CompatBlocks.GALANOS_SLAB.get(), CompatBlocks.GALANOS_VERTICAL_SLAB.get(), consumer);
 
         //Bookshelves
-        bookshelfRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM_BOOKSHELF.get(), consumer);
-        bookshelfRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK_BOOKSHELF.get(), consumer);
+        bookshelfRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM.bookshelf().get(), consumer);
+        bookshelfRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK.bookshelf().get(), consumer);
 
         //Ladder
-        ladderRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM_LADDER.get(), consumer);
-        ladderRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK_LADDER.get(), consumer);
+        ladderRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM.ladder().get(), consumer);
+        ladderRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK.ladder().get(), consumer);
 
         //Wooden Posts
-        postRecipe(BOPBlocks.JACARANDA_WOOD.get(), CompatBlocks.JACARANDA_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_JACARANDA_WOOD.get(), CompatBlocks.STRIPPED_JACARANDA_POST.get(), consumer);
-        postRecipe(BOPBlocks.FIR_WOOD.get(), CompatBlocks.FIR_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_FIR_WOOD.get(), CompatBlocks.STRIPPED_FIR_POST.get(), consumer);
-        postRecipe(BOPBlocks.REDWOOD_WOOD.get(), CompatBlocks.REDWOOD_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_REDWOOD_WOOD.get(), CompatBlocks.STRIPPED_REDWOOD_POST.get(), consumer);
-        postRecipe(BOPBlocks.MAHOGANY_WOOD.get(), CompatBlocks.MAHOGANY_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_MAHOGANY_WOOD.get(), CompatBlocks.STRIPPED_MAHOGANY_POST.get(), consumer);
-        postRecipe(BOPBlocks.WILLOW_WOOD.get(), CompatBlocks.WILLOW_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_WILLOW_WOOD.get(), CompatBlocks.STRIPPED_WILLOW_POST.get(), consumer);
-        postRecipe(BOPBlocks.MAGIC_WOOD.get(), CompatBlocks.MAGIC_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_MAGIC_WOOD.get(), CompatBlocks.STRIPPED_MAGIC_POST.get(), consumer);
-        postRecipe(BOPBlocks.DEAD_WOOD.get(), CompatBlocks.DEAD_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_DEAD_WOOD.get(), CompatBlocks.STRIPPED_DEAD_POST.get(), consumer);
-        postRecipe(BOPBlocks.UMBRAN_WOOD.get(), CompatBlocks.UMBRAN_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_UMBRAN_WOOD.get(), CompatBlocks.STRIPPED_UMBRAN_POST.get(), consumer);
-        postRecipe(BOPBlocks.PALM_WOOD.get(), CompatBlocks.PALM_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_PALM_WOOD.get(), CompatBlocks.STRIPPED_PALM_POST.get(), consumer);
-        postRecipe(BOPBlocks.HELLBARK_WOOD.get(), CompatBlocks.HELLBARK_POST.get(), consumer);
-        postRecipe(BOPBlocks.STRIPPED_HELLBARK_WOOD.get(), CompatBlocks.STRIPPED_HELLBARK_POST.get(), consumer);
+        postRecipe(BOPBlocks.JACARANDA_WOOD.get(), CompatBlocks.JACARANDA.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_JACARANDA_WOOD.get(), CompatBlocks.JACARANDA.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.FIR_WOOD.get(), CompatBlocks.FIR.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_FIR_WOOD.get(), CompatBlocks.FIR.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.REDWOOD_WOOD.get(), CompatBlocks.REDWOOD.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_REDWOOD_WOOD.get(), CompatBlocks.REDWOOD.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.MAHOGANY_WOOD.get(), CompatBlocks.MAHOGANY.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_MAHOGANY_WOOD.get(), CompatBlocks.MAHOGANY.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.WILLOW_WOOD.get(), CompatBlocks.WILLOW.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_WILLOW_WOOD.get(), CompatBlocks.WILLOW.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.MAGIC_WOOD.get(), CompatBlocks.MAGIC.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_MAGIC_WOOD.get(), CompatBlocks.MAGIC.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.DEAD_WOOD.get(), CompatBlocks.DEAD.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_DEAD_WOOD.get(), CompatBlocks.DEAD.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.UMBRAN_WOOD.get(), CompatBlocks.UMBRAN.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_UMBRAN_WOOD.get(), CompatBlocks.UMBRAN.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.PALM_WOOD.get(), CompatBlocks.PALM.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_PALM_WOOD.get(), CompatBlocks.PALM.strippedPost().get(), consumer);
+        postRecipe(BOPBlocks.HELLBARK_WOOD.get(), CompatBlocks.HELLBARK.post().get(), consumer);
+        postRecipe(BOPBlocks.STRIPPED_HELLBARK_WOOD.get(), CompatBlocks.HELLBARK.strippedPost().get(), consumer);
 
         //Hedges
-        hedgeRecipe(logTag("jacaranda"), BOPBlocks.JACARANDA_LEAVES.get(), CompatBlocks.JACARANDA_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("fir"), BOPBlocks.FIR_LEAVES.get(), CompatBlocks.FIR_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("redwood"), BOPBlocks.REDWOOD_LEAVES.get(), CompatBlocks.REDWOOD_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("mahogany"), BOPBlocks.MAHOGANY_LEAVES.get(), CompatBlocks.MAHOGANY_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("willow"), BOPBlocks.WILLOW_LEAVES.get(), CompatBlocks.WILLOW_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("magic"), BOPBlocks.MAGIC_LEAVES.get(), CompatBlocks.MAGIC_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("dead"), BOPBlocks.DEAD_LEAVES.get(), CompatBlocks.DEAD_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("umbran"), BOPBlocks.UMBRAN_LEAVES.get(), CompatBlocks.UMBRAN_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("palm"), BOPBlocks.PALM_LEAVES.get(), CompatBlocks.PALM_HEDGE.get(), consumer);
-        hedgeRecipe(logTag("hellbark"), BOPBlocks.HELLBARK_LEAVES.get(), CompatBlocks.HELLBARK_HEDGE.get(), consumer);
-        hedgeRecipe(ItemTags.OAK_LOGS, BOPBlocks.FLOWERING_OAK_LEAVES.get(), CompatBlocks.FLOWERING_OAK_HEDGE.get(), consumer);
-        hedgeRecipe(ItemTags.BIRCH_LOGS, BOPBlocks.RAINBOW_BIRCH_LEAVES.get(), CompatBlocks.RAINBOW_BIRCH_HEDGE.get(), consumer);
-        hedgeRecipe(ItemTags.OAK_LOGS, BOPBlocks.ORIGIN_LEAVES.get(), CompatBlocks.ORIGIN_HEDGE.get(), consumer);
-        hedgeRecipe(ItemTags.OAK_LOGS, BOPBlocks.MAPLE_LEAVES.get(), CompatBlocks.MAPLE_HEDGE.get(), consumer);
-        hedgeRecipe(ItemTags.DARK_OAK_LOGS, BOPBlocks.ORANGE_AUTUMN_LEAVES.get(), CompatBlocks.ORANGE_AUTUMN_HEDGE.get(), consumer);
-        hedgeRecipe(ItemTags.BIRCH_LOGS, BOPBlocks.YELLOW_AUTUMN_LEAVES.get(), CompatBlocks.YELLOW_AUTUMN_HEDGE.get(), consumer);
+        hedgeRecipe(logTag("jacaranda"), BOPBlocks.JACARANDA_LEAVES.get(), CompatBlocks.JACARANDA.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("fir"), BOPBlocks.FIR_LEAVES.get(), CompatBlocks.FIR.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("redwood"), BOPBlocks.REDWOOD_LEAVES.get(), CompatBlocks.REDWOOD.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("mahogany"), BOPBlocks.MAHOGANY_LEAVES.get(), CompatBlocks.MAHOGANY.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("willow"), BOPBlocks.WILLOW_LEAVES.get(), CompatBlocks.WILLOW.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("magic"), BOPBlocks.MAGIC_LEAVES.get(), CompatBlocks.MAGIC.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("dead"), BOPBlocks.DEAD_LEAVES.get(), CompatBlocks.DEAD.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("umbran"), BOPBlocks.UMBRAN_LEAVES.get(), CompatBlocks.UMBRAN.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("palm"), BOPBlocks.PALM_LEAVES.get(), CompatBlocks.PALM.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(logTag("hellbark"), BOPBlocks.HELLBARK_LEAVES.get(), CompatBlocks.HELLBARK.leaveSet().hedge().get(), consumer);
+        hedgeRecipe(ItemTags.OAK_LOGS, BOPBlocks.FLOWERING_OAK_LEAVES.get(), CompatBlocks.FLOWERING_OAK.hedge().get(), consumer);
+        hedgeRecipe(ItemTags.BIRCH_LOGS, BOPBlocks.RAINBOW_BIRCH_LEAVES.get(), CompatBlocks.RAINBOW_BIRCH.hedge().get(), consumer);
+        hedgeRecipe(ItemTags.OAK_LOGS, BOPBlocks.ORIGIN_LEAVES.get(), CompatBlocks.ORIGIN.hedge().get(), consumer);
+        hedgeRecipe(ItemTags.OAK_LOGS, BOPBlocks.MAPLE_LEAVES.get(), CompatBlocks.MAPLE.hedge().get(), consumer);
+        hedgeRecipe(ItemTags.DARK_OAK_LOGS, BOPBlocks.ORANGE_AUTUMN_LEAVES.get(), CompatBlocks.ORANGE_AUTUMN.hedge().get(), consumer);
+        hedgeRecipe(ItemTags.BIRCH_LOGS, BOPBlocks.YELLOW_AUTUMN_LEAVES.get(), CompatBlocks.YELLOW_AUTUMN.hedge().get(), consumer);
 
         //Leaf Carpets
-        leafCarpetRecipe(BOPBlocks.JACARANDA_LEAVES.get(), CompatBlocks.JACARANDA_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.FIR_LEAVES.get(), CompatBlocks.FIR_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.REDWOOD_LEAVES.get(), CompatBlocks.REDWOOD_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.MAHOGANY_LEAVES.get(), CompatBlocks.MAHOGANY_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.WILLOW_LEAVES.get(), CompatBlocks.WILLOW_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.MAGIC_LEAVES.get(), CompatBlocks.MAGIC_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.DEAD_LEAVES.get(), CompatBlocks.DEAD_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.UMBRAN_LEAVES.get(), CompatBlocks.UMBRAN_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.PALM_LEAVES.get(), CompatBlocks.PALM_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.HELLBARK_LEAVES.get(), CompatBlocks.HELLBARK_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.FLOWERING_OAK_LEAVES.get(), CompatBlocks.FLOWERING_OAK_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.RAINBOW_BIRCH_LEAVES.get(), CompatBlocks.RAINBOW_BIRCH_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.ORIGIN_LEAVES.get(), CompatBlocks.ORIGIN_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.MAPLE_LEAVES.get(), CompatBlocks.MAPLE_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.ORANGE_AUTUMN_LEAVES.get(), CompatBlocks.ORANGE_AUTUMN_LEAF_CARPET.get(), consumer);
-        leafCarpetRecipe(BOPBlocks.YELLOW_AUTUMN_LEAVES.get(), CompatBlocks.YELLOW_AUTUMN_LEAF_CARPET.get(), consumer);
+        leafCarpetRecipe(BOPBlocks.JACARANDA_LEAVES.get(), CompatBlocks.JACARANDA.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.FIR_LEAVES.get(), CompatBlocks.FIR.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.REDWOOD_LEAVES.get(), CompatBlocks.REDWOOD.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.MAHOGANY_LEAVES.get(), CompatBlocks.MAHOGANY.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.WILLOW_LEAVES.get(), CompatBlocks.WILLOW.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.MAGIC_LEAVES.get(), CompatBlocks.MAGIC.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.DEAD_LEAVES.get(), CompatBlocks.DEAD.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.UMBRAN_LEAVES.get(), CompatBlocks.UMBRAN.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.PALM_LEAVES.get(), CompatBlocks.PALM.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.HELLBARK_LEAVES.get(), CompatBlocks.HELLBARK.leaveSet().leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.FLOWERING_OAK_LEAVES.get(), CompatBlocks.FLOWERING_OAK.leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.RAINBOW_BIRCH_LEAVES.get(), CompatBlocks.RAINBOW_BIRCH.leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.ORIGIN_LEAVES.get(), CompatBlocks.ORIGIN.leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.MAPLE_LEAVES.get(), CompatBlocks.MAPLE.leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.ORANGE_AUTUMN_LEAVES.get(), CompatBlocks.ORANGE_AUTUMN.leafCarpet().get(), consumer);
+        leafCarpetRecipe(BOPBlocks.YELLOW_AUTUMN_LEAVES.get(), CompatBlocks.YELLOW_AUTUMN.leafCarpet().get(), consumer);
 
         //Leaf Piles
-        leafPileRecipe(BOPBlocks.JACARANDA_LEAVES.get(), CompatBlocks.JACARANDA_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.FIR_LEAVES.get(), CompatBlocks.FIR_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.REDWOOD_LEAVES.get(), CompatBlocks.REDWOOD_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.MAHOGANY_LEAVES.get(), CompatBlocks.MAHOGANY_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.WILLOW_LEAVES.get(), CompatBlocks.WILLOW_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.MAGIC_LEAVES.get(), CompatBlocks.MAGIC_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.DEAD_LEAVES.get(), CompatBlocks.DEAD_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.UMBRAN_LEAVES.get(), CompatBlocks.UMBRAN_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.PALM_LEAVES.get(), CompatBlocks.PALM_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.HELLBARK_LEAVES.get(), CompatBlocks.HELLBARK_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.FLOWERING_OAK_LEAVES.get(), CompatBlocks.FLOWERING_OAK_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.RAINBOW_BIRCH_LEAVES.get(), CompatBlocks.RAINBOW_BIRCH_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.ORIGIN_LEAVES.get(), CompatBlocks.ORIGIN_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.MAPLE_LEAVES.get(), CompatBlocks.MAPLE_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.ORANGE_AUTUMN_LEAVES.get(), CompatBlocks.ORANGE_AUTUMN_LEAF_PILE.get(), consumer);
-        leafPileRecipe(BOPBlocks.YELLOW_AUTUMN_LEAVES.get(), CompatBlocks.YELLOW_AUTUMN_LEAF_PILE.get(), consumer);
+        leafPileRecipe(BOPBlocks.JACARANDA_LEAVES.get(), CompatBlocks.JACARANDA.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.FIR_LEAVES.get(), CompatBlocks.FIR.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.REDWOOD_LEAVES.get(), CompatBlocks.REDWOOD.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.MAHOGANY_LEAVES.get(), CompatBlocks.MAHOGANY.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.WILLOW_LEAVES.get(), CompatBlocks.WILLOW.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.MAGIC_LEAVES.get(), CompatBlocks.MAGIC.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.DEAD_LEAVES.get(), CompatBlocks.DEAD.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.UMBRAN_LEAVES.get(), CompatBlocks.UMBRAN.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.PALM_LEAVES.get(), CompatBlocks.PALM.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.HELLBARK_LEAVES.get(), CompatBlocks.HELLBARK.leaveSet().leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.FLOWERING_OAK_LEAVES.get(), CompatBlocks.FLOWERING_OAK.leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.RAINBOW_BIRCH_LEAVES.get(), CompatBlocks.RAINBOW_BIRCH.leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.ORIGIN_LEAVES.get(), CompatBlocks.ORIGIN.leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.MAPLE_LEAVES.get(), CompatBlocks.MAPLE.leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.ORANGE_AUTUMN_LEAVES.get(), CompatBlocks.ORANGE_AUTUMN.leafPile().get(), consumer);
+        leafPileRecipe(BOPBlocks.YELLOW_AUTUMN_LEAVES.get(), CompatBlocks.YELLOW_AUTUMN.leafPile().get(), consumer);
 
         //Chest
-        chestRecipes(BOPBlocks.JACARANDA_PLANKS.get(), logTag("jacaranda"), CompatBlocks.JACARANDA_CHESTS, consumer);
-        chestRecipes(BOPBlocks.FIR_PLANKS.get(), logTag("fir"), CompatBlocks.FIR_CHESTS, consumer);
-        chestRecipes(BOPBlocks.REDWOOD_PLANKS.get(), logTag("redwood"), CompatBlocks.REDWOOD_CHESTS, consumer);
-        chestRecipes(BOPBlocks.MAHOGANY_PLANKS.get(), logTag("mahogany"), CompatBlocks.MAHOGANY_CHESTS, consumer);
-        chestRecipes(BOPBlocks.WILLOW_PLANKS.get(), logTag("willow"), CompatBlocks.WILLOW_CHESTS, consumer);
-        chestRecipes(BOPBlocks.MAGIC_PLANKS.get(), logTag("magic"), CompatBlocks.MAGIC_CHESTS, consumer);
-        chestRecipes(BOPBlocks.DEAD_PLANKS.get(), logTag("dead"), CompatBlocks.DEAD_CHESTS, consumer);
-        chestRecipes(BOPBlocks.UMBRAN_PLANKS.get(), logTag("umbran"), CompatBlocks.UMBRAN_CHESTS, consumer);
-        chestRecipes(BOPBlocks.PALM_PLANKS.get(), logTag("palm"), CompatBlocks.PALM_CHESTS, consumer);
-        chestRecipes(BOPBlocks.HELLBARK_PLANKS.get(), logTag("hellbark"), CompatBlocks.HELLBARK_CHESTS, consumer);
+        chestRecipes(BOPBlocks.JACARANDA_PLANKS.get(), logTag("jacaranda"), CompatBlocks.JACARANDA, consumer);
+        chestRecipes(BOPBlocks.FIR_PLANKS.get(), logTag("fir"), CompatBlocks.FIR, consumer);
+        chestRecipes(BOPBlocks.REDWOOD_PLANKS.get(), logTag("redwood"), CompatBlocks.REDWOOD, consumer);
+        chestRecipes(BOPBlocks.MAHOGANY_PLANKS.get(), logTag("mahogany"), CompatBlocks.MAHOGANY, consumer);
+        chestRecipes(BOPBlocks.WILLOW_PLANKS.get(), logTag("willow"), CompatBlocks.WILLOW, consumer);
+        chestRecipes(BOPBlocks.MAGIC_PLANKS.get(), logTag("magic"), CompatBlocks.MAGIC, consumer);
+        chestRecipes(BOPBlocks.DEAD_PLANKS.get(), logTag("dead"), CompatBlocks.DEAD, consumer);
+        chestRecipes(BOPBlocks.UMBRAN_PLANKS.get(), logTag("umbran"), CompatBlocks.UMBRAN, consumer);
+        chestRecipes(BOPBlocks.PALM_PLANKS.get(), logTag("palm"), CompatBlocks.PALM, consumer);
+        chestRecipes(BOPBlocks.HELLBARK_PLANKS.get(), logTag("hellbark"), CompatBlocks.HELLBARK, consumer);
 
         //Beehives
-        beehiveRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM_BEEHIVE.get(), consumer);
-        beehiveRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK_BEEHIVE.get(), consumer);
+        beehiveRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM.beehive().get(), consumer);
+        beehiveRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK.beehive().get(), consumer);
 
         //Vertical Planks
-        verticalPlankRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.VERTICAL_JACARANDA_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.VERTICAL_FIR_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.VERTICAL_REDWOOD_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.VERTICAL_MAHOGANY_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.VERTICAL_WILLOW_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.VERTICAL_MAGIC_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.VERTICAL_DEAD_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.VERTICAL_UMBRAN_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.VERTICAL_PALM_PLANKS.get(), consumer);
-        verticalPlankRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.VERTICAL_HELLBARK_PLANKS.get(), consumer);
+        verticalPlankRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM.verticalPlanks().get(), consumer);
+        verticalPlankRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK.verticalPlanks().get(), consumer);
 
         //Cabinet
-        cabinetRecipe(BOPBlocks.JACARANDA_SLAB.get(), BOPBlocks.JACARANDA_TRAPDOOR.get(), CompatBlocks.JACARANDA_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.FIR_SLAB.get(), BOPBlocks.FIR_TRAPDOOR.get(), CompatBlocks.FIR_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.REDWOOD_SLAB.get(), BOPBlocks.REDWOOD_TRAPDOOR.get(), CompatBlocks.REDWOOD_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.MAHOGANY_SLAB.get(), BOPBlocks.MAHOGANY_TRAPDOOR.get(), CompatBlocks.MAHOGANY_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.WILLOW_SLAB.get(), BOPBlocks.WILLOW_TRAPDOOR.get(), CompatBlocks.WILLOW_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.MAGIC_SLAB.get(), BOPBlocks.MAGIC_TRAPDOOR.get(), CompatBlocks.MAGIC_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.DEAD_SLAB.get(), BOPBlocks.DEAD_TRAPDOOR.get(), CompatBlocks.DEAD_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.UMBRAN_SLAB.get(), BOPBlocks.UMBRAN_TRAPDOOR.get(), CompatBlocks.UMBRAN_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.PALM_SLAB.get(), BOPBlocks.PALM_TRAPDOOR.get(), CompatBlocks.PALM_CABINET.get(), consumer);
-        cabinetRecipe(BOPBlocks.HELLBARK_SLAB.get(), BOPBlocks.HELLBARK_TRAPDOOR.get(), CompatBlocks.HELLBARK_CABINET.get(), consumer);
+        cabinetRecipe(BOPBlocks.JACARANDA_SLAB.get(), BOPBlocks.JACARANDA_TRAPDOOR.get(), CompatBlocks.JACARANDA.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.FIR_SLAB.get(), BOPBlocks.FIR_TRAPDOOR.get(), CompatBlocks.FIR.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.REDWOOD_SLAB.get(), BOPBlocks.REDWOOD_TRAPDOOR.get(), CompatBlocks.REDWOOD.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.MAHOGANY_SLAB.get(), BOPBlocks.MAHOGANY_TRAPDOOR.get(), CompatBlocks.MAHOGANY.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.WILLOW_SLAB.get(), BOPBlocks.WILLOW_TRAPDOOR.get(), CompatBlocks.WILLOW.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.MAGIC_SLAB.get(), BOPBlocks.MAGIC_TRAPDOOR.get(), CompatBlocks.MAGIC.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.DEAD_SLAB.get(), BOPBlocks.DEAD_TRAPDOOR.get(), CompatBlocks.DEAD.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.UMBRAN_SLAB.get(), BOPBlocks.UMBRAN_TRAPDOOR.get(), CompatBlocks.UMBRAN.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.PALM_SLAB.get(), BOPBlocks.PALM_TRAPDOOR.get(), CompatBlocks.PALM.cabinet().get(), consumer);
+        cabinetRecipe(BOPBlocks.HELLBARK_SLAB.get(), BOPBlocks.HELLBARK_TRAPDOOR.get(), CompatBlocks.HELLBARK.cabinet().get(), consumer);
 
         //Stairs
         sandstoneStairsRecipe(CompatBlocks.BLACK_SANDSTONE_BRICKS.get(), CompatBlocks.BLACK_SANDSTONE_BRICK_STAIRS.get(), consumer);
@@ -269,28 +265,28 @@ public class ModRecipeProvider extends RecipeProvider {
 
         //Tables
 
-        tableRecipe(BOPBlocks.JACARANDA_SLAB.get(), BOPBlocks.JACARANDA_FENCE.get(), CompatBlocks.JACARANDA_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.FIR_SLAB.get(), BOPBlocks.FIR_FENCE.get(), CompatBlocks.FIR_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.REDWOOD_SLAB.get(), BOPBlocks.REDWOOD_FENCE.get(), CompatBlocks.REDWOOD_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.MAHOGANY_SLAB.get(), BOPBlocks.MAHOGANY_FENCE.get(), CompatBlocks.MAHOGANY_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.WILLOW_SLAB.get(), BOPBlocks.WILLOW_FENCE.get(), CompatBlocks.WILLOW_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.MAGIC_SLAB.get(), BOPBlocks.MAGIC_FENCE.get(), CompatBlocks.MAGIC_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.DEAD_SLAB.get(), BOPBlocks.DEAD_FENCE.get(), CompatBlocks.DEAD_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.UMBRAN_SLAB.get(), BOPBlocks.UMBRAN_FENCE.get(), CompatBlocks.UMBRAN_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.PALM_SLAB.get(), BOPBlocks.PALM_FENCE.get(), CompatBlocks.PALM_TABLE.get(), consumer);
-        tableRecipe(BOPBlocks.HELLBARK_SLAB.get(), BOPBlocks.HELLBARK_FENCE.get(), CompatBlocks.HELLBARK_TABLE.get(), consumer);
+        tableRecipe(BOPBlocks.JACARANDA_SLAB.get(), BOPBlocks.JACARANDA_FENCE.get(), CompatBlocks.JACARANDA.table().get(), consumer);
+        tableRecipe(BOPBlocks.FIR_SLAB.get(), BOPBlocks.FIR_FENCE.get(), CompatBlocks.FIR.table().get(), consumer);
+        tableRecipe(BOPBlocks.REDWOOD_SLAB.get(), BOPBlocks.REDWOOD_FENCE.get(), CompatBlocks.REDWOOD.table().get(), consumer);
+        tableRecipe(BOPBlocks.MAHOGANY_SLAB.get(), BOPBlocks.MAHOGANY_FENCE.get(), CompatBlocks.MAHOGANY.table().get(), consumer);
+        tableRecipe(BOPBlocks.WILLOW_SLAB.get(), BOPBlocks.WILLOW_FENCE.get(), CompatBlocks.WILLOW.table().get(), consumer);
+        tableRecipe(BOPBlocks.MAGIC_SLAB.get(), BOPBlocks.MAGIC_FENCE.get(), CompatBlocks.MAGIC.table().get(), consumer);
+        tableRecipe(BOPBlocks.DEAD_SLAB.get(), BOPBlocks.DEAD_FENCE.get(), CompatBlocks.DEAD.table().get(), consumer);
+        tableRecipe(BOPBlocks.UMBRAN_SLAB.get(), BOPBlocks.UMBRAN_FENCE.get(), CompatBlocks.UMBRAN.table().get(), consumer);
+        tableRecipe(BOPBlocks.PALM_SLAB.get(), BOPBlocks.PALM_FENCE.get(), CompatBlocks.PALM.table().get(), consumer);
+        tableRecipe(BOPBlocks.HELLBARK_SLAB.get(), BOPBlocks.HELLBARK_FENCE.get(), CompatBlocks.HELLBARK.table().get(), consumer);
 
         //Boards
-        boardsRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM_BOARDS.get(), consumer);
-        boardsRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK_BOARDS.get(), consumer);
+        boardsRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK.boards().get(), consumer);
 
         //Furnace Boats
         furnaceBoatRecipe(BOPItems.JACARANDA_BOAT.get(), CompatItems.JACARANDA_FURNACE_BOAT.get(), consumer);
@@ -450,13 +446,10 @@ public class ModRecipeProvider extends RecipeProvider {
         return TagUtil.itemTag("biomesoplenty", woodType + "_logs");
     }
 
-    public static final ResourceLocation quarkFlag = new ResourceLocation("blueprint", "quark_flag");
-    public static final ResourceLocation blueprintAnd = new ResourceLocation("blueprint", "and");
-
     private static ICondition vslabCondition() {
         return new ModLoadedCondition(VSLAB_ID);
     }
-    
+
     private static ICondition quarkFlagCondition(String flag) {
         // TODO emit actual flag condition
         return new ModLoadedCondition(QUARK_ID);
@@ -502,7 +495,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         //Quark
         ConditionalRecipe.builder()
-                .addCondition(new OrCondition())
+                .addCondition(new ModLoadedCondition(QUARK_ID))
                 .addRecipe(consumer1 -> ShapedRecipeBuilder.shaped(DECORATIONS, bookshelf).define('#', plank).define('B', Items.BOOK).pattern("###").pattern("BBB").pattern("###").unlockedBy(getHasName(plank), has(plank)).save(consumer1))
                 .build(consumer, new ResourceLocation(CompatOPlenty.MOD_ID, "crafting/" + getItemName(bookshelf) + "_quark"));
     }
@@ -554,9 +547,9 @@ public class ModRecipeProvider extends RecipeProvider {
                 .build(consumer, new ResourceLocation(CompatOPlenty.MOD_ID, "crafting/" + getItemName(leaves) + "_from_leaf_piles"));
     }
 
-    public static void chestRecipes(ItemLike planks, TagKey<Item> log, Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> chestPair, Consumer<FinishedRecipe> consumer) {
-        Block normal = chestPair.getFirst().get();
-        Block trapped = chestPair.getSecond().get();
+    public static void chestRecipes(ItemLike planks, TagKey<Item> log, CompatBlocks.WoodSet set, Consumer<FinishedRecipe> consumer) {
+        Block normal = set.chest().get();
+        Block trapped = set.trappedChest().get();
 
         //Woodworks
         ConditionalRecipe.builder()
@@ -620,15 +613,15 @@ public class ModRecipeProvider extends RecipeProvider {
                         .addRecipe(consumer1 -> stairBuilder(stairs, ingredientOf(material)).unlockedBy(getHasName(material), has(material)).save(consumer1))
                         .build(consumer, new ResourceLocation(CompatOPlenty.MOD_ID, "crafting/" + getItemName(stairs)));
     }
-    
+
     public static void galanosStairsRecipe(ItemLike material, ItemLike stairs, Consumer<FinishedRecipe> consumer) {
             ConditionalRecipe.builder()
                     .addCondition(quarkFlagCondition("midori"))
                     .addRecipe(consumer1 -> stairBuilder(stairs, ingredientOf(material)).unlockedBy(getHasName(material), has(material)).save(consumer1))
                     .build(consumer, new ResourceLocation(CompatOPlenty.MOD_ID, "crafting/" + getItemName(stairs)));
-      
+
     }
-    
+
     public static void polishedRoseStairsRecipe(ItemLike material, ItemLike stairs, Consumer<FinishedRecipe> consumer) {
         ConditionalRecipe.builder()
                 .addCondition(new ModLoadedCondition(CompatOPlenty.TWIGS_ID))

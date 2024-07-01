@@ -1,5 +1,5 @@
 {
-  "parent": "blueprint:block/post",
+  "parent": "quark:block/post",
   "textures": {
     "texture": "biomesoplenty:block/redwood_log"
   }

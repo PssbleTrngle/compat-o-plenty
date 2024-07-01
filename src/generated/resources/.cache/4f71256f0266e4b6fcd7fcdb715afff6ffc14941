@@ -1,0 +1,11 @@
+// 1.20.1	2024-07-01T20:54:35.0539408	Tags for minecraft:item mod id compatoplenty
+dc0a4f39532024a40a81bd22c13639b820541fc7 data/forge/tags/items/bookshelves.json
+4d0058aae9584d3928c46c329f935407156bbd8c data/forge/tags/items/chests/trapped.json
+6367f1b66aba094e27a5310fb37ad5e9251be5c6 data/forge/tags/items/chests/wooden.json
+34e1eb193de3034020533c12010e4830df363017 data/forge/tags/items/ladders.json
+8292491712a4c3ce696d6306c8e286ef0ab58e93 data/minecraft/tags/items/non_flammable_wood.json
+ba0b12c86c8da9657f54393a8099c909971f6801 data/minecraft/tags/items/planks.json
+8196a5090eff3a9889df27d15078eeb3219bca67 data/minecraft/tags/items/slabs.json
+35ed7518349a17c4e8e0fa2f508b4d6ef7d27990 data/minecraft/tags/items/stairs.json
+dfa4208049dac04a236e0ff21b9c3232205572ef data/minecraft/tags/items/walls.json
+47e179f1206342d576408a109c4543f800d245c7 data/woodworks/tags/items/leaf_piles.json

@@ -4,12 +4,13 @@
     {
       "conditions": [
         {
-          "type": "blueprint:quark_flag",
-          "flag": "vertical_slabs"
+          "type": "forge:mod_loaded",
+          "modid": "v_slab_compat"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shapeless",
+        "category": "building",
         "ingredients": [
           {
             "item": "compatoplenty:cut_white_sandstone_vertical_slab"

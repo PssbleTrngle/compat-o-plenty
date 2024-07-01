@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "#": {
+            "item": "biomesoplenty:origin_leaves"
+          }
+        },
+        "pattern": [
+          "##"
+        ],
+        "result": {
+          "count": 3,
+          "item": "compatoplenty:origin_leaf_leaf_carpet"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}
