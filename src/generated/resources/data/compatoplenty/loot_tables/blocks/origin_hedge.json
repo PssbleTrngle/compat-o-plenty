@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "compatoplenty:origin_leaf_hedge"
+          "name": "compatoplenty:origin_hedge"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "compatoplenty:blocks/origin_leaf_hedge"
+  "random_sequence": "compatoplenty:blocks/origin_hedge"
 }

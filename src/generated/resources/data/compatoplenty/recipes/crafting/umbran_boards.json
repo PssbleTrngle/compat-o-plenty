@@ -22,16 +22,14 @@
         "category": "misc",
         "key": {
           "S": {
-            "item": "biomesoplenty:umbran_planks"
+            "item": "biomesoplenty:umbran_slab"
           }
         },
         "pattern": [
           "S",
-          "S",
           "S"
         ],
         "result": {
-          "count": 3,
           "item": "compatoplenty:umbran_boards"
         },
         "show_notification": true

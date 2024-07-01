@@ -22,16 +22,14 @@
         "category": "misc",
         "key": {
           "S": {
-            "item": "biomesoplenty:palm_planks"
+            "item": "biomesoplenty:palm_slab"
           }
         },
         "pattern": [
           "S",
-          "S",
           "S"
         ],
         "result": {
-          "count": 3,
           "item": "compatoplenty:palm_boards"
         },
         "show_notification": true

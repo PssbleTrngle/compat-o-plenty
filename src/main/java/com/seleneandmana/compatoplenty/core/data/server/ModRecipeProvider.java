@@ -277,16 +277,16 @@ public class ModRecipeProvider extends RecipeProvider {
         tableRecipe(BOPBlocks.HELLBARK_SLAB.get(), BOPBlocks.HELLBARK_FENCE.get(), CompatBlocks.HELLBARK.table().get(), consumer);
 
         //Boards
-        boardsRecipe(BOPBlocks.JACARANDA_PLANKS.get(), CompatBlocks.JACARANDA.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.FIR_PLANKS.get(), CompatBlocks.FIR.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.REDWOOD_PLANKS.get(), CompatBlocks.REDWOOD.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.MAHOGANY_PLANKS.get(), CompatBlocks.MAHOGANY.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.WILLOW_PLANKS.get(), CompatBlocks.WILLOW.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.MAGIC_PLANKS.get(), CompatBlocks.MAGIC.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.DEAD_PLANKS.get(), CompatBlocks.DEAD.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.UMBRAN_PLANKS.get(), CompatBlocks.UMBRAN.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.PALM_PLANKS.get(), CompatBlocks.PALM.boards().get(), consumer);
-        boardsRecipe(BOPBlocks.HELLBARK_PLANKS.get(), CompatBlocks.HELLBARK.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.JACARANDA_SLAB.get(), CompatBlocks.JACARANDA.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.FIR_SLAB.get(), CompatBlocks.FIR.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.REDWOOD_SLAB.get(), CompatBlocks.REDWOOD.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.MAHOGANY_SLAB.get(), CompatBlocks.MAHOGANY.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.WILLOW_SLAB.get(), CompatBlocks.WILLOW.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.MAGIC_SLAB.get(), CompatBlocks.MAGIC.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.DEAD_SLAB.get(), CompatBlocks.DEAD.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.UMBRAN_SLAB.get(), CompatBlocks.UMBRAN.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.PALM_SLAB.get(), CompatBlocks.PALM.boards().get(), consumer);
+        boardsRecipe(BOPBlocks.HELLBARK_SLAB.get(), CompatBlocks.HELLBARK.boards().get(), consumer);
 
         //Furnace Boats
         furnaceBoatRecipe(BOPItems.JACARANDA_BOAT.get(), CompatItems.JACARANDA_FURNACE_BOAT.get(), consumer);
@@ -479,10 +479,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .build(consumer, new ResourceLocation(CompatOPlenty.MOD_ID, "crafting/" + getItemName(verticalPlank) + "_revert"));
     }
 
-    public static void boardsRecipe(ItemLike plank, ItemLike board, Consumer<FinishedRecipe> consumer) {
+    public static void boardsRecipe(ItemLike slab, ItemLike board, Consumer<FinishedRecipe> consumer) {
         ConditionalRecipe.builder()
                 .addCondition(new AndCondition(new ModLoadedCondition(CompatOPlenty.WOODWORKS_ID), new ConfigValueCondition(new ResourceLocation(CompatOPlenty.WOODWORKS_ID, "config"), WoodworksConfig.COMMON.woodenBoards, "wooden_boards", Maps.newHashMap(), false)))
-                .addRecipe(consumer1 -> ShapedRecipeBuilder.shaped(DECORATIONS, board, 3).define('S', plank).pattern("S").pattern("S").pattern("S").unlockedBy(getHasName(plank), has(plank)).save(consumer1, new ResourceLocation(CompatOPlenty.MOD_ID, getItemName(board))))
+                .addRecipe(consumer1 -> ShapedRecipeBuilder.shaped(DECORATIONS, board).define('S', slab).pattern("S").pattern("S").unlockedBy(getHasName(slab), has(slab)).save(consumer1, new ResourceLocation(CompatOPlenty.MOD_ID, getItemName(board))))
                 .build(consumer, new ResourceLocation(CompatOPlenty.MOD_ID, "crafting/" + getItemName(board)));
     }
 
