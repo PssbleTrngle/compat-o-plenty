@@ -224,9 +224,9 @@ public class CompatBlocks {
     public static void populateCreativeTabs(LeafSet set, Supplier<? extends ItemLike> leaves) {
         CreativeModeTabContentsPopulator.mod(CompatOPlenty.MOD_ID)
                 .predicate($ -> true)
-                .addItemsAfter(of(leaves).and(anyModLoaded(QUARK_ID)), set.hedge())
-                .addItemsAfter(of(leaves).and(anyModLoaded(QUARK_ID)), set.leafCarpet())
-                .addItemsAfter(of(leaves), set.leafPile());
+                .addItemsAfter(of(Items.OAK_LEAVES).and(anyModLoaded(QUARK_ID)), set.hedge())
+                .addItemsAfter(of(Items.OAK_LEAVES).and(anyModLoaded(QUARK_ID)), set.leafCarpet())
+                .addItemsAfter(of(Items.OAK_LEAVES), set.leafPile());
     }
 
     static {

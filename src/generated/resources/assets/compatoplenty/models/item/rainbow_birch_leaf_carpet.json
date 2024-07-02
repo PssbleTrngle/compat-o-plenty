@@ -1,3 +1,6 @@
 {
-  "parent": "compatoplenty:block/rainbow_birch_leaf_carpet"
+  "parent": "quark:block/leaf_carpet",
+  "textures": {
+    "all": "biomesoplenty:block/rainbow_birch_leaves"
+  }
 }

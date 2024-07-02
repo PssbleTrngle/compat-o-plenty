@@ -1,3 +1,7 @@
 {
-  "parent": "compatoplenty:block/rainbow_birch_hedge_post"
+  "parent": "quark:block/hedge_post",
+  "textures": {
+    "leaf": "biomesoplenty:block/rainbow_birch_leaves",
+    "log": "minecraft:block/birch_log"
+  }
 }

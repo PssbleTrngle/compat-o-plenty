@@ -44,7 +44,7 @@ public class BlockColoring {
                 ).flatMap(Function.identity()).toArray(Block[]::new)
         );
         //Rainbow
-        blockColors.register((state, world, pos, tint) -> world != null && pos != null ? ColorHandler.getRainbowBirchColor(world, pos) : FoliageColor.getDefaultColor(), leafItems(CompatBlocks.RAINBOW_BIRCH).toArray(Block[]::new));
+        blockColors.register((state, world, pos, tint) -> world != null && pos != null ? ColorHandler.getRainbowBirchColor(world, pos) : -1, leafItems(CompatBlocks.RAINBOW_BIRCH).toArray(Block[]::new));
     }
 
     @SubscribeEvent

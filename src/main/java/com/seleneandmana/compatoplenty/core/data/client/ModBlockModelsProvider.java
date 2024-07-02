@@ -1,9 +1,9 @@
 package com.seleneandmana.compatoplenty.core.data.client;
 
+import biomesoplenty.api.block.BOPBlocks;
 import com.seleneandmana.compatoplenty.common.blocks.VerticalSlabBlock;
 import com.seleneandmana.compatoplenty.core.CompatOPlenty;
 import com.seleneandmana.compatoplenty.core.registry.CompatBlocks;
-import com.teamabnormals.blueprint.common.block.LeafPileBlock;
 import net.mehvahdjukaar.vsc.temp.TempVerticalSlabBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,11 +11,15 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.ModelBuilder;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.violetmoon.quark.content.building.block.HedgeBlock;
 import org.violetmoon.quark.content.building.block.WoodPostBlock;
@@ -37,27 +41,50 @@ public class ModBlockModelsProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        CompatBlocks.leaveSets().forEach(this::registerStatesAndModels);
         CompatBlocks.woodSets().forEach(this::registerStatesAndModels);
+        CompatBlocks.leaveSets().forEach(set -> {
+            if (set != CompatBlocks.RAINBOW_BIRCH) registerStatesAndModels(set);
+        });
+
+        hedge(CompatBlocks.RAINBOW_BIRCH.hedge().get(), blockTexture(Blocks.BIRCH_LOG), blockTexture(Blocks.BIRCH_LEAVES));
+        leafCarpet(CompatBlocks.RAINBOW_BIRCH.leafCarpet().get(), blockTexture(Blocks.BIRCH_LEAVES));
+        leafPile(CompatBlocks.RAINBOW_BIRCH.leafPile().get(), blockTexture(Blocks.BIRCH_LEAVES));
+
+        hedgePostModel(itemModels(), name(CompatBlocks.RAINBOW_BIRCH.hedge().get()), blockTexture(Blocks.BIRCH_LOG), blockTexture(BOPBlocks.RAINBOW_BIRCH_LEAVES.get()));
+        leafCarpetModel(itemModels(), name(CompatBlocks.RAINBOW_BIRCH.leafCarpet().get()), blockTexture(BOPBlocks.RAINBOW_BIRCH_LEAVES.get()));
+        leafPileModel(itemModels(), name(CompatBlocks.RAINBOW_BIRCH.leafPile().get()), blockTexture(BOPBlocks.RAINBOW_BIRCH_LEAVES.get()));
     }
 
     private void registerStatesAndModels(CompatBlocks.LeafSet set) {
-        leafCarpet(set.leafCarpet().get());
-        leafPile(set.leafPile().get());
-        hedge(set.hedge().get(), key(set.fence().get()));
+        var base = key(set.hedge().get()).withPath(it -> it.substring(0, it.length() - "_hedge".length()));
+        var texture = new ResourceLocation(BOP_ID, "block/" + base.getPath());
+
+        var leaves = texture.withSuffix("_leaves");
+        var log = key(set.fence().get()).withPath(it -> "block/" + it.substring(0, it.length() - "_fence".length()) + "_log");
+
+        leafCarpet(set.leafCarpet().get(), leaves);
+        leafPile(set.leafPile().get(), leaves);
+        hedge(set.hedge().get(), log, leaves);
     }
 
     private void registerStatesAndModels(CompatBlocks.WoodSet set) {
-        post(set.post().get());
-        post(set.strippedPost().get());
-        verticalSlab(set.verticalSlab().get());
-        verticalPlanks(set.verticalPlanks().get());
+        var base = key(set.post().get()).withPath(it -> it.substring(0, it.length() - "_post".length()));
+        var texture = new ResourceLocation(BOP_ID, "block/" + base.getPath());
+
+        var planks = texture.withSuffix("_planks");
+        var log = texture.withSuffix("_log");
+        var strippedLog = texture.withPath("block/stripped_" + base.getPath() + "_log");
+
+        post(set.post().get(), log);
+        post(set.strippedPost().get(), strippedLog);
+        verticalSlab(set.verticalSlab().get(), planks);
+        verticalPlanks(set.verticalPlanks().get(), planks);
         boards(set.boards().get());
         cabinet(set.cabinet().get());
-        bookshelf(set.bookshelf().get());
+        bookshelf(set.bookshelf().get(), planks);
         table(set.table().get());
-        chest(set.chest().get(), "chest");
-        chest(set.trappedChest().get(), "trapped_chest");
+        chest(set.chest().get(), planks);
+        chest(set.trappedChest().get(), planks);
         ladder(set.ladder().get());
         beehive(set.beehive().get());
     }
@@ -83,10 +110,8 @@ public class ModBlockModelsProvider extends BlockStateProvider {
         return itemModels().withExistingParent(name(block), blockTexture(block));
     }
 
-    private void bookshelf(Block block) {
-        var name = name(block);
-        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_bookshelf".length()) + "_planks");
-        simpleBlock(block, models().cubeColumn(name, key(block).withPrefix("block/"), texture));
+    private void bookshelf(Block block, ResourceLocation top) {
+        simpleBlock(block, models().cubeColumn(name(block), blockTexture(block), top));
         itemModel(block);
     }
 
@@ -110,11 +135,14 @@ public class ModBlockModelsProvider extends BlockStateProvider {
         itemModel(block);
     }
 
-    private void leafPile(Block block) {
-        var name = name(block);
-        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_leaf_pile".length()) + "_leaves");
+    private <M extends ModelBuilder<M>> M leafPileModel(ModelProvider<M> provider, String name, ResourceLocation texture) {
+        return provider.singleTexture(name, new ResourceLocation(BLUEPRINT_ID, "block/tinted_leaf_pile"), "all", texture);
+    }
 
-        var model = models().singleTexture(name, new ResourceLocation(BLUEPRINT_ID, "block/leaf_pile"), "all", texture);
+    private void leafPile(Block block, ResourceLocation texture) {
+        var name = name(block);
+
+        var model = leafPileModel(models(), name, texture);
 
         var builder = getMultipartBuilder(block);
 
@@ -153,16 +181,17 @@ public class ModBlockModelsProvider extends BlockStateProvider {
         itemModels().singleTexture(name, new ResourceLocation("item/generated"), "layer0", texture);
     }
 
-    private void leafCarpet(Block block) {
-        var name = name(block);
-        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_leaf_carpet".length()) + "_leaves");
-        simpleBlock(block, models().singleTexture(name, new ResourceLocation(QUARK_ID, "block/leaf_carpet"), "all", texture));
+    private <M extends ModelBuilder<M>> M leafCarpetModel(ModelProvider<M> provider, String name, ResourceLocation texture) {
+        return provider.singleTexture(name, new ResourceLocation(QUARK_ID, "block/leaf_carpet"), "all", texture);
+    }
+
+    private void leafCarpet(Block block, ResourceLocation texture) {
+        simpleBlock(block, leafCarpetModel(models(), name(block), texture));
         itemModel(block);
     }
 
-    private void verticalPlanks(Block block) {
+    private void verticalPlanks(Block block, ResourceLocation texture) {
         var name = name(block);
-        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring("vertical_".length()));
         simpleBlock(block, models().singleTexture(name, new ResourceLocation(QUARK_ID, "block/vertical_planks"), "all", texture));
         itemModel(block);
     }
@@ -176,9 +205,8 @@ public class ModBlockModelsProvider extends BlockStateProvider {
         itemModel(block);
     }
 
-    private void verticalSlab(Block block) {
+    private void verticalSlab(Block block, ResourceLocation texture) {
         var name = name(block);
-        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_vertical_slab".length()) + "_planks");
         var model = models().withExistingParent(name, new ResourceLocation(QUARK_ID, "block/vertical_slab"))
                 .texture("side", texture)
                 .texture("top", texture)
@@ -205,9 +233,8 @@ public class ModBlockModelsProvider extends BlockStateProvider {
         itemModel(block);
     }
 
-    private void post(Block block) {
+    private void post(Block block, ResourceLocation texture) {
         var name = name(block);
-        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_post".length()) + "_log");
 
         var base = models().singleTexture(name, new ResourceLocation(QUARK_ID, "block/post"), texture);
         var connect = models().singleTexture(name + "_connect", new ResourceLocation(QUARK_ID, "block/post_connect"), texture);
@@ -275,9 +302,7 @@ public class ModBlockModelsProvider extends BlockStateProvider {
         itemModel(block);
     }
 
-    private void chest(Block block, String suffix) {
-        var name = name(block);
-        var particle = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - suffix.length() - 1) + "_planks");
+    private void chest(Block block, ResourceLocation particle) {
         simpleBlock(block, models().getBuilder(name(block)).texture("particle", particle));
         itemModels().withExistingParent(name(block), new ResourceLocation(BLUEPRINT_ID, "item/template_chest"));
     }
@@ -317,20 +342,21 @@ public class ModBlockModelsProvider extends BlockStateProvider {
         itemModel(block);
     }
 
-    private void hedge(Block block, ResourceLocation fence) {
+    private <M extends ModelBuilder<M>> M hedgePostModel(ModelProvider<M> provider, String name, ResourceLocation log, ResourceLocation leaves) {
+        return provider.withExistingParent(name, new ResourceLocation(QUARK_ID, "block/hedge_post"))
+                .texture("log", log)
+                .texture("leaf", leaves);
+    }
+
+    private void hedge(Block block, ResourceLocation log, ResourceLocation leaves) {
         var name = name(block);
-        var base = name.substring(0, name.length() - "_hedge".length());
-        var leaves = new ResourceLocation(BOP_ID, "block/" + base + "_leaves");
-        var log = new ResourceLocation(fence.getNamespace(), "block/" + fence.getPath().substring(0, fence.getPath().length() - "_fence".length()) + "_log");
 
         var builder = getMultipartBuilder(block);
 
         var extend = models().singleTexture(name + "_extend", new ResourceLocation(QUARK_ID, "block/hedge_extend"), "leaf", leaves);
         var side = models().singleTexture(name + "_side", new ResourceLocation(QUARK_ID, "block/hedge_side"), "leaf", leaves);
 
-        var post = models().withExistingParent(name + "_post", new ResourceLocation(QUARK_ID, "block/hedge_post"))
-                .texture("log", log)
-                .texture("leaf", leaves);
+        var post = hedgePostModel(models(), name + "_post", log, leaves);
 
         builder.part()
                 .modelFile(post)

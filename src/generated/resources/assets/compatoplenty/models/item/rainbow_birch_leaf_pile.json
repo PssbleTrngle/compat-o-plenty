@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "blueprint:block/tinted_leaf_pile",
   "textures": {
-    "layer0": "biomesoplenty:block/rainbow_birch_leaves"
+    "all": "biomesoplenty:block/rainbow_birch_leaves",
+    "layer0": "minecraft:block/birch_leaves"
   }
 }
