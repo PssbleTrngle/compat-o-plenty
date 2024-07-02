@@ -1,9 +1,9 @@
 {
   "values": [
-    "compatoplenty:fir_chest",
-    "compatoplenty:fir_trapped_chest",
     "compatoplenty:jacaranda_chest",
     "compatoplenty:jacaranda_trapped_chest",
+    "compatoplenty:fir_chest",
+    "compatoplenty:fir_trapped_chest",
     "compatoplenty:redwood_chest",
     "compatoplenty:redwood_trapped_chest",
     "compatoplenty:mahogany_chest",
@@ -17,6 +17,8 @@
     "compatoplenty:umbran_chest",
     "compatoplenty:umbran_trapped_chest",
     "compatoplenty:palm_chest",
-    "compatoplenty:palm_trapped_chest"
+    "compatoplenty:palm_trapped_chest",
+    "compatoplenty:hellbark_chest",
+    "compatoplenty:hellbark_trapped_chest"
   ]
 }

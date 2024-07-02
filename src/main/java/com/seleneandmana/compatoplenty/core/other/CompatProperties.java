@@ -15,4 +15,5 @@ public class CompatProperties {
     public static final PropertyUtil.WoodSetProperties UMBRAN = PropertyUtil.WoodSetProperties.builder(MapColor.TERRACOTTA_BLUE).build();
     public static final PropertyUtil.WoodSetProperties PALM = PropertyUtil.WoodSetProperties.builder(MapColor.TERRACOTTA_YELLOW).build();
     public static final PropertyUtil.WoodSetProperties HELLBARK = PropertyUtil.WoodSetProperties.builder(MapColor.TERRACOTTA_GRAY).build();
+    public static final PropertyUtil.WoodSetProperties SNOW_BLOSSOM = PropertyUtil.WoodSetProperties.builder(MapColor.SNOW).build();
 }

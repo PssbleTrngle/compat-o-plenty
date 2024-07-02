@@ -6,12 +6,9 @@ import com.seleneandmana.compatoplenty.core.registry.CompatBlocks;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,7 +16,6 @@ import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -56,24 +52,7 @@ public class BlockColoring {
         final BlockColors blockColors = event.getBlockColors();
         final ItemColors itemColors = event.getItemColors();
 
-        var leafBlocks = Stream.of(
-                        CompatBlocks.JACARANDA.leaveSet(),
-                        CompatBlocks.FIR.leaveSet(),
-                        CompatBlocks.REDWOOD.leaveSet(),
-                        CompatBlocks.MAHOGANY.leaveSet(),
-                        CompatBlocks.WILLOW.leaveSet(),
-                        CompatBlocks.MAGIC.leaveSet(),
-                        CompatBlocks.DEAD.leaveSet(),
-                        CompatBlocks.UMBRAN.leaveSet(),
-                        CompatBlocks.PALM.leaveSet(),
-                        CompatBlocks.HELLBARK.leaveSet(),
-                        CompatBlocks.FLOWERING_OAK,
-                        CompatBlocks.RAINBOW_BIRCH,
-                        CompatBlocks.ORIGIN,
-                        CompatBlocks.MAPLE,
-                        CompatBlocks.ORANGE_AUTUMN,
-                        CompatBlocks.YELLOW_AUTUMN
-                )
+        var leafBlocks = CompatBlocks.leaveSets()
                 .flatMap(BlockColoring::leafItems)
                 .toArray(ItemLike[]::new);
 

@@ -60,7 +60,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            args '--mod', 'compatoplenty', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'biomesoplenty', '--existing-mod', 'quark'
+            args '--mod', 'compatoplenty', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'biomesoplenty', '--existing-mod', 'quark', '--existing-mod', 'blueprint'
 
             mods {
                 compatoplenty {

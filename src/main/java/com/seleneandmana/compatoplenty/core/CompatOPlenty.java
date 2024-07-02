@@ -23,7 +23,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod("compatoplenty")
+@Mod(CompatOPlenty.MOD_ID)
 @Mod.EventBusSubscriber(modid = CompatOPlenty.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CompatOPlenty {
     public static final String MOD_ID = "compatoplenty";
@@ -34,6 +34,7 @@ public class CompatOPlenty {
     public static final String FARMERS_ID = "farmersdelight";
     public static final String BOATLOAD_ID = "boatload";
     public static final String VSLAB_ID = "v_slab_compat";
+    public static final String BLUEPRINT_ID = "blueprint";
 
 
     public static final Logger LOGGER = LogManager.getLogger();

@@ -34,7 +34,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     }
 
     private void add(CompatBlocks.WoodSet set) {
-        add(set.leaveSet());
         tag(BlueprintItemTags.LADDERS).add(asItem(set.ladder()));
         tag(ItemTags.PLANKS).add(asItem(set.verticalPlanks()));
         tag(Tags.Items.CHESTS_WOODEN).add(asItem(set.chest()), asItem(set.trappedChest()));
@@ -44,21 +43,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        add(CompatBlocks.FIR);
-        add(CompatBlocks.JACARANDA);
-        add(CompatBlocks.REDWOOD);
-        add(CompatBlocks.MAHOGANY);
-        add(CompatBlocks.WILLOW);
-        add(CompatBlocks.MAGIC);
-        add(CompatBlocks.DEAD);
-        add(CompatBlocks.UMBRAN);
-        add(CompatBlocks.PALM);
-        add(CompatBlocks.RAINBOW_BIRCH);
-        add(CompatBlocks.ORANGE_AUTUMN);
-        add(CompatBlocks.YELLOW_AUTUMN);
-        add(CompatBlocks.MAPLE);
-        add(CompatBlocks.ORIGIN);
-        add(CompatBlocks.FLOWERING_OAK);
+        CompatBlocks.woodSets().forEach(this::add);
+        CompatBlocks.leaveSets().forEach(this::add);
 
         //Minecraft
         tag(ItemTags.SLABS).add(

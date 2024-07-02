@@ -11,19 +11,51 @@ public class ModLanguageProvider extends LanguageProvider {
         super(output, CompatOPlenty.MOD_ID, "en_us");
     }
 
+    private void addTranslations(CompatBlocks.LeafSet set, String name) {
+        add(set.hedge().get(), name + " Leaf Hedge");
+        add(set.leafCarpet().get(), name + " Leaf Carpet");
+        add(set.leafPile().get(), "Pile of " + name + " Leaves");
+    }
+
+    private void addTranslations(CompatBlocks.WoodSet set, String name) {
+        add(set.verticalSlab().get(), name + " Vertical Slab");
+        add(set.bookshelf().get(), name + " Bookshelf");
+        add(set.ladder().get(), name + " Ladder");
+        add(set.post().get(), name + " Post");
+        add(set.table().get(), name + " Table");
+        add(set.beehive().get(), name + " Beehive");
+        add(set.cabinet().get(), name + "Cabinet");
+        add(set.boards().get(), name + "Boards");
+        add(set.chest().get(), name + " Chest");
+        add(set.trappedChest().get(), name + " Trapped Chest");
+        add(set.strippedPost().get(), "Stripped " + name + " Post");
+        add(set.verticalPlanks().get(), "Vertical " + name + " Planks");
+
+        addTranslations(set.leaveSet(), name);
+    }
+
     @Override
     protected void addTranslations() {
         //Vertical Slabs
-        add(CompatBlocks.JACARANDA.verticalSlab().get(), "Jacaranda Vertical Slab");
-        add(CompatBlocks.FIR.verticalSlab().get(), "Fir Vertical Slab");
-        add(CompatBlocks.REDWOOD.verticalSlab().get(), "Redwood Vertical Slab");
-        add(CompatBlocks.MAHOGANY.verticalSlab().get(), "Mahogany Vertical Slab");
-        add(CompatBlocks.WILLOW.verticalSlab().get(), "Willow Vertical Slab");
-        add(CompatBlocks.MAGIC.verticalSlab().get(), "Magic Vertical Slab");
-        add(CompatBlocks.DEAD.verticalSlab().get(), "Dead Vertical Slab");
-        add(CompatBlocks.UMBRAN.verticalSlab().get(), "Umbran Vertical Slab");
-        add(CompatBlocks.PALM.verticalSlab().get(), "Palm Vertical Slab");
-        add(CompatBlocks.HELLBARK.verticalSlab().get(), "Hellbark Vertical Slab");
+        addTranslations(CompatBlocks.JACARANDA, "Jacaranda");
+        addTranslations(CompatBlocks.FIR, "Fir");
+        addTranslations(CompatBlocks.REDWOOD, "Redwood");
+        addTranslations(CompatBlocks.MAHOGANY, "Mahogany");
+        addTranslations(CompatBlocks.WILLOW, "Willow");
+        addTranslations(CompatBlocks.MAGIC, "Magic");
+        addTranslations(CompatBlocks.DEAD, "Dead");
+        addTranslations(CompatBlocks.UMBRAN, "Umbran");
+        addTranslations(CompatBlocks.PALM, "Palm");
+        addTranslations(CompatBlocks.HELLBARK, "Hellbark");
+
+        addTranslations(CompatBlocks.FLOWERING_OAK, "Flowering Oak");
+        addTranslations(CompatBlocks.RAINBOW_BIRCH, "Rainbow Birch");
+        addTranslations(CompatBlocks.ORIGIN, "Origin");
+        addTranslations(CompatBlocks.MAPLE, "Maple");
+        addTranslations(CompatBlocks.ORANGE_AUTUMN, "Orange Autumn");
+        addTranslations(CompatBlocks.YELLOW_AUTUMN, "Yellow Autumn");
+        addTranslations(CompatBlocks.SNOW_BLOSSOM, "Snowblossom");
+
         add(CompatBlocks.WHITE_SANDSTONE_VERTICAL_SLAB.get(), "White Sandstone Vertical Slab");
         add(CompatBlocks.CUT_WHITE_SANDSTONE_VERTICAL_SLAB.get(), "Cut White Sandstone Vertical Slab");
         add(CompatBlocks.SMOOTH_WHITE_SANDSTONE_VERTICAL_SLAB.get(), "Smooth White Sandstone Vertical Slab");
@@ -39,193 +71,6 @@ public class ModLanguageProvider extends LanguageProvider {
         add(CompatBlocks.GALANOS_VERTICAL_SLAB.get(), "Galanos Vertical Slab");
         add(CompatBlocks.POLISHED_ROSE_QUARTZ_VERTICAL_SLAB.get(), "Polished Rose Quartz Vertical Slab");
         add(CompatBlocks.POLISHED_ROSE_QUARTZ_BRICK_VERTICAL_SLAB.get(), "Polished Rose Quartz Brick Vertical Slab");
-
-        //Bookshelves
-        add(CompatBlocks.JACARANDA.bookshelf().get(), "Jacaranda Bookshelf");
-        add(CompatBlocks.FIR.bookshelf().get(), "Fir Bookshelf");
-        add(CompatBlocks.REDWOOD.bookshelf().get(), "Redwood Bookshelf");
-        add(CompatBlocks.MAHOGANY.bookshelf().get(), "Mahogany Bookshelf");
-        add(CompatBlocks.WILLOW.bookshelf().get(), "Willow Bookshelf");
-        add(CompatBlocks.MAGIC.bookshelf().get(), "Magic Bookshelf");
-        add(CompatBlocks.DEAD.bookshelf().get(), "Dead Bookshelf");
-        add(CompatBlocks.UMBRAN.bookshelf().get(), "Umbran Bookshelf");
-        add(CompatBlocks.PALM.bookshelf().get(), "Palm Bookshelf");
-        add(CompatBlocks.HELLBARK.bookshelf().get(), "Hellbark Bookshelf");
-
-        //Ladders
-        add(CompatBlocks.JACARANDA.ladder().get(), "Jacaranda Ladder");
-        add(CompatBlocks.FIR.ladder().get(), "Fir Ladder");
-        add(CompatBlocks.REDWOOD.ladder().get(), "Redwood Ladder");
-        add(CompatBlocks.MAHOGANY.ladder().get(), "Mahogany Ladder");
-        add(CompatBlocks.WILLOW.ladder().get(), "Willow Ladder");
-        add(CompatBlocks.MAGIC.ladder().get(), "Magic Ladder");
-        add(CompatBlocks.DEAD.ladder().get(), "Dead Ladder");
-        add(CompatBlocks.UMBRAN.ladder().get(), "Umbran Ladder");
-        add(CompatBlocks.PALM.ladder().get(), "Palm Ladder");
-        add(CompatBlocks.HELLBARK.ladder().get(), "Hellbark Ladder");
-
-        //Posts
-        add(CompatBlocks.JACARANDA.post().get(), "Jacaranda Post");
-        add(CompatBlocks.FIR.post().get(), "Fir Post");
-        add(CompatBlocks.REDWOOD.post().get(), "Redwood Post");
-        add(CompatBlocks.MAHOGANY.post().get(), "Mahogany Post");
-        add(CompatBlocks.WILLOW.post().get(), "Willow Post");
-        add(CompatBlocks.MAGIC.post().get(), "Magic Post");
-        add(CompatBlocks.DEAD.post().get(), "Dead Post");
-        add(CompatBlocks.UMBRAN.post().get(), "Umbran Post");
-        add(CompatBlocks.PALM.post().get(), "Palm Post");
-        add(CompatBlocks.HELLBARK.post().get(), "Hellbark Post");
-
-        //Stripped Posts
-        add(CompatBlocks.JACARANDA.strippedPost().get(), "Stripped Jacaranda Post");
-        add(CompatBlocks.FIR.strippedPost().get(), "Stripped Fir Post");
-        add(CompatBlocks.REDWOOD.strippedPost().get(), "Stripped Redwood Post");
-        add(CompatBlocks.MAHOGANY.strippedPost().get(), "Stripped Mahogany Post");
-        add(CompatBlocks.WILLOW.strippedPost().get(), "Stripped Willow Post");
-        add(CompatBlocks.MAGIC.strippedPost().get(), "Stripped Magic Post");
-        add(CompatBlocks.DEAD.strippedPost().get(), "Stripped Dead Post");
-        add(CompatBlocks.UMBRAN.strippedPost().get(), "Stripped Umbran Post");
-        add(CompatBlocks.PALM.strippedPost().get(), "Stripped Palm Post");
-        add(CompatBlocks.HELLBARK.strippedPost().get(), "Stripped Hellbark Post");
-
-        //Leaf Hedges
-        add(CompatBlocks.JACARANDA.leaveSet().hedge().get(), "Jacaranda Leaf Hedge");
-        add(CompatBlocks.FIR.leaveSet().hedge().get(), "Fir Leaf Hedge");
-        add(CompatBlocks.REDWOOD.leaveSet().hedge().get(), "Redwood Leaf Hedge");
-        add(CompatBlocks.MAHOGANY.leaveSet().hedge().get(), "Mahogany Leaf Hedge");
-        add(CompatBlocks.WILLOW.leaveSet().hedge().get(), "Willow Leaf Hedge");
-        add(CompatBlocks.MAGIC.leaveSet().hedge().get(), "Magic Leaf Hedge");
-        add(CompatBlocks.DEAD.leaveSet().hedge().get(), "Dead Leaf Hedge");
-        add(CompatBlocks.UMBRAN.leaveSet().hedge().get(), "Umbran Leaf Hedge");
-        add(CompatBlocks.PALM.leaveSet().hedge().get(), "Palm Leaf Hedge");
-        add(CompatBlocks.HELLBARK.leaveSet().hedge().get(), "Hellbark Leaf Hedge");
-        add(CompatBlocks.FLOWERING_OAK.hedge().get(), "Flowering Oak Leaf Hedge");
-        add(CompatBlocks.RAINBOW_BIRCH.hedge().get(), "Rainbow Birch Leaf Hedge");
-        add(CompatBlocks.ORIGIN.hedge().get(), "Origin Leaf Hedge");
-        add(CompatBlocks.MAPLE.hedge().get(), "Maple Leaf Hedge");
-        add(CompatBlocks.ORANGE_AUTUMN.hedge().get(), "Orange Autumn Leaf Hedge");
-        add(CompatBlocks.YELLOW_AUTUMN.hedge().get(), "Yellow Autumn Leaf Hedge");
-
-        //Leaf Carpets
-        add(CompatBlocks.JACARANDA.leaveSet().leafCarpet().get(), "Jacaranda Leaf Carpet");
-        add(CompatBlocks.FIR.leaveSet().leafCarpet().get(), "Fir Leaf Carpet");
-        add(CompatBlocks.REDWOOD.leaveSet().leafCarpet().get(), "Redwood Leaf Carpet");
-        add(CompatBlocks.MAHOGANY.leaveSet().leafCarpet().get(), "Mahogany Leaf Carpet");
-        add(CompatBlocks.WILLOW.leaveSet().leafCarpet().get(), "Willow Leaf Carpet");
-        add(CompatBlocks.MAGIC.leaveSet().leafCarpet().get(), "Magic Leaf Carpet");
-        add(CompatBlocks.DEAD.leaveSet().leafCarpet().get(), "Dead Leaf Carpet");
-        add(CompatBlocks.UMBRAN.leaveSet().leafCarpet().get(), "Umbran Leaf Carpet");
-        add(CompatBlocks.PALM.leaveSet().leafCarpet().get(), "Palm Leaf Carpet");
-        add(CompatBlocks.HELLBARK.leaveSet().leafCarpet().get(), "Hellbark Leaf Carpet");
-        add(CompatBlocks.FLOWERING_OAK.leafCarpet().get(), "Flowering Oak Leaf Carpet");
-        add(CompatBlocks.RAINBOW_BIRCH.leafCarpet().get(), "Rainbow Birch Leaf Carpet");
-        add(CompatBlocks.ORIGIN.leafCarpet().get(), "Origin Leaf Carpet");
-        add(CompatBlocks.MAPLE.leafCarpet().get(), "Maple Leaf Carpet");
-        add(CompatBlocks.ORANGE_AUTUMN.leafCarpet().get(), "Orange Autumn Leaf Carpet");
-        add(CompatBlocks.YELLOW_AUTUMN.leafCarpet().get(), "Yellow Autumn Leaf Carpet");
-
-        //Leaf Piles
-        add(CompatBlocks.JACARANDA.leaveSet().leafPile().get(), "Pile of Jacaranda Leaves");
-        add(CompatBlocks.FIR.leaveSet().leafPile().get(), "Pile of Fir Leaves");
-        add(CompatBlocks.REDWOOD.leaveSet().leafPile().get(), "Pile of Redwood Leaves");
-        add(CompatBlocks.MAHOGANY.leaveSet().leafPile().get(), "Pile of Mahogany Leaves");
-        add(CompatBlocks.WILLOW.leaveSet().leafPile().get(), "Pile of Willow Leaves");
-        add(CompatBlocks.MAGIC.leaveSet().leafPile().get(), "Pile of Magic Leaves");
-        add(CompatBlocks.DEAD.leaveSet().leafPile().get(), "Pile of Dead Leaves");
-        add(CompatBlocks.UMBRAN.leaveSet().leafPile().get(), "Pile of Umbran Leaves");
-        add(CompatBlocks.PALM.leaveSet().leafPile().get(), "Pile of Palm Leaves");
-        add(CompatBlocks.HELLBARK.leaveSet().leafPile().get(), "Pile of Hellbark Leaves");
-        add(CompatBlocks.FLOWERING_OAK.leafPile().get(), "Pile of Flowering Oak Leaves");
-        add(CompatBlocks.RAINBOW_BIRCH.leafPile().get(), "Pile of Rainbow Birch Leaves");
-        add(CompatBlocks.ORIGIN.leafPile().get(), "Pile of Origin Leaves");
-        add(CompatBlocks.MAPLE.leafPile().get(), "Pile of Maple Leaves");
-        add(CompatBlocks.ORANGE_AUTUMN.leafPile().get(), "Pile of Orange Autumn Leaves");
-        add(CompatBlocks.YELLOW_AUTUMN.leafPile().get(), "Pile of Yellow Autumn Leaves");
-
-        //Chests
-        add(CompatBlocks.JACARANDA.chest().get(), "Jacaranda Chest");
-        add(CompatBlocks.FIR.chest().get(), "Fir Chest");
-        add(CompatBlocks.REDWOOD.chest().get(), "Redwood Chest");
-        add(CompatBlocks.MAHOGANY.chest().get(), "Mahogany Chest");
-        add(CompatBlocks.WILLOW.chest().get(), "Willow Chest");
-        add(CompatBlocks.MAGIC.chest().get(), "Magic Chest");
-        add(CompatBlocks.DEAD.chest().get(), "Dead Chest");
-        add(CompatBlocks.UMBRAN.chest().get(), "Umbran Chest");
-        add(CompatBlocks.PALM.chest().get(), "Palm Chest");
-        add(CompatBlocks.HELLBARK.chest().get(), "Hellbark Chest");
-
-        //Trapped Chests
-        add(CompatBlocks.JACARANDA.trappedChest().get(), "Jacaranda Trapped Chest");
-        add(CompatBlocks.FIR.trappedChest().get(), "Fir Trapped Chest");
-        add(CompatBlocks.REDWOOD.trappedChest().get(), "Redwood Trapped Chest");
-        add(CompatBlocks.MAHOGANY.trappedChest().get(), "Mahogany Trapped Chest");
-        add(CompatBlocks.WILLOW.trappedChest().get(), "Willow Trapped Chest");
-        add(CompatBlocks.MAGIC.trappedChest().get(), "Magic Trapped Chest");
-        add(CompatBlocks.DEAD.trappedChest().get(), "Dead Trapped Chest");
-        add(CompatBlocks.UMBRAN.trappedChest().get(), "Umbran Trapped Chest");
-        add(CompatBlocks.PALM.trappedChest().get(), "Palm Trapped Chest");
-        add(CompatBlocks.HELLBARK.trappedChest().get(), "Hellbark Trapped Chest");
-
-        //Beehives
-        add(CompatBlocks.JACARANDA.beehive().get(), "Jacaranda Beehive");
-        add(CompatBlocks.FIR.beehive().get(), "Fir Beehive");
-        add(CompatBlocks.REDWOOD.beehive().get(), "Redwood Beehive");
-        add(CompatBlocks.MAHOGANY.beehive().get(), "Mahogany Beehive");
-        add(CompatBlocks.WILLOW.beehive().get(), "Willow Beehive");
-        add(CompatBlocks.MAGIC.beehive().get(), "Magic Beehive");
-        add(CompatBlocks.DEAD.beehive().get(), "Dead Beehive");
-        add(CompatBlocks.UMBRAN.beehive().get(), "Umbran Beehive");
-        add(CompatBlocks.PALM.beehive().get(), "Palm Beehive");
-        add(CompatBlocks.HELLBARK.beehive().get(), "Hellbark Beehive");
-
-        //Cabinets
-        add(CompatBlocks.JACARANDA.cabinet().get(), "Jacaranda Cabinet");
-        add(CompatBlocks.FIR.cabinet().get(), "Fir Cabinet");
-        add(CompatBlocks.REDWOOD.cabinet().get(), "Redwood Cabinet");
-        add(CompatBlocks.MAHOGANY.cabinet().get(), "Mahogany Cabinet");
-        add(CompatBlocks.WILLOW.cabinet().get(), "Willow Cabinet");
-        add(CompatBlocks.MAGIC.cabinet().get(), "Magic Cabinet");
-        add(CompatBlocks.DEAD.cabinet().get(), "Dead Cabinet");
-        add(CompatBlocks.UMBRAN.cabinet().get(), "Umbran Cabinet");
-        add(CompatBlocks.PALM.cabinet().get(), "Palm Cabinet");
-        add(CompatBlocks.HELLBARK.cabinet().get(), "Hellbark Cabinet");
-
-        //Tables
-        add(CompatBlocks.JACARANDA.table().get(), "Jacaranda Table");
-        add(CompatBlocks.FIR.table().get(), "Fir Table");
-        add(CompatBlocks.REDWOOD.table().get(), "Redwood Table");
-        add(CompatBlocks.MAHOGANY.table().get(), "Mahogany Table");
-        add(CompatBlocks.WILLOW.table().get(), "Willow Table");
-        add(CompatBlocks.MAGIC.table().get(), "Magic Table");
-        add(CompatBlocks.DEAD.table().get(), "Dead Table");
-        add(CompatBlocks.UMBRAN.table().get(), "Umbran Table");
-        add(CompatBlocks.PALM.table().get(), "Palm Table");
-        add(CompatBlocks.HELLBARK.table().get(), "Hellbark Table");
-
-        //Vertical Planks
-        add(CompatBlocks.JACARANDA.verticalPlanks().get(), "Vertical Jacaranda Planks");
-        add(CompatBlocks.FIR.verticalPlanks().get(), "Vertical Fir Planks");
-        add(CompatBlocks.REDWOOD.verticalPlanks().get(), "Vertical Redwood Planks");
-        add(CompatBlocks.MAHOGANY.verticalPlanks().get(), "Vertical Mahogany Planks");
-        add(CompatBlocks.WILLOW.verticalPlanks().get(), "Vertical Willow Planks");
-        add(CompatBlocks.MAGIC.verticalPlanks().get(), "Vertical Magic Planks");
-        add(CompatBlocks.DEAD.verticalPlanks().get(), "Vertical Dead Planks");
-        add(CompatBlocks.UMBRAN.verticalPlanks().get(), "Vertical Umbran Planks");
-        add(CompatBlocks.PALM.verticalPlanks().get(), "Vertical Palm Planks");
-        add(CompatBlocks.HELLBARK.verticalPlanks().get(), "Vertical Hellbark Planks");
-
-        //Boards
-        //Tables
-        add(CompatBlocks.JACARANDA.boards().get(), "Jacaranda Boards");
-        add(CompatBlocks.FIR.boards().get(), "Fir Boards");
-        add(CompatBlocks.REDWOOD.boards().get(), "Redwood Boards");
-        add(CompatBlocks.MAHOGANY.boards().get(), "Mahogany Boards");
-        add(CompatBlocks.WILLOW.boards().get(), "Willow Boards");
-        add(CompatBlocks.MAGIC.boards().get(), "Magic Boards");
-        add(CompatBlocks.DEAD.boards().get(), "Dead Boards");
-        add(CompatBlocks.UMBRAN.boards().get(), "Umbran Boards");
-        add(CompatBlocks.PALM.boards().get(), "Palm Boards");
-        add(CompatBlocks.HELLBARK.boards().get(), "Hellbark Boards");
 
         //Sandstone Bricks
         add(CompatBlocks.WHITE_SANDSTONE_BRICKS.get(), "White Sandstone Bricks");

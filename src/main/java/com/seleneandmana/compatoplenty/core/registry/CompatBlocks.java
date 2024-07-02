@@ -17,11 +17,6 @@ import com.teamabnormals.blueprint.common.block.*;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
@@ -35,8 +30,8 @@ import org.violetmoon.quark.content.building.block.WoodPostBlock;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
-import static com.seleneandmana.compatoplenty.core.CompatOPlenty.BOP_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.FARMERS_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.QUARK_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.TWIGS_ID;
@@ -50,9 +45,10 @@ public class CompatBlocks {
     public static final CompatBlockSubRegistryHelper HELPER = CompatOPlenty.REGISTRY_HELPER.getBlockSubHelper();
 
     public record LeafSet(
-            RegistryObject<? extends Block> hedge,
+            RegistryObject<? extends HedgeBlock> hedge,
             RegistryObject<? extends Block> leafCarpet,
-            RegistryObject<? extends Block> leafPile
+            RegistryObject<? extends Block> leafPile,
+            Supplier<? extends Block> fence
     ) {
     }
 
@@ -69,29 +65,20 @@ public class CompatBlocks {
             RegistryObject<? extends Block> cabinet,
             RegistryObject<? extends Block> table,
             RegistryObject<? extends Block> verticalPlanks,
-            RegistryObject<? extends Block> boards
+            RegistryObject<? extends RotatedPillarBlock> boards
     ) {
     }
 
     public static final WoodSet JACARANDA = createCompatWoodSet("jacaranda", CompatProperties.JACARANDA, () -> BOPBlocks.JACARANDA_PLANKS.get(), () -> BOPBlocks.JACARANDA_LOG.get(), () -> BOPBlocks.STRIPPED_JACARANDA_LOG.get(), () -> BOPBlocks.JACARANDA_LEAVES.get(), () -> BOPBlocks.JACARANDA_FENCE.get(), () -> BOPBlocks.JACARANDA_SLAB.get(), MapColor.TERRACOTTA_PINK);
-
     public static final WoodSet FIR = createCompatWoodSet("fir", CompatProperties.FIR, () -> BOPBlocks.FIR_PLANKS.get(), () -> BOPBlocks.FIR_LOG.get(), () -> BOPBlocks.STRIPPED_FIR_LOG.get(), () -> BOPBlocks.FIR_LEAVES.get(), () -> BOPBlocks.FIR_FENCE.get(), () -> BOPBlocks.FIR_SLAB.get(), MapColor.TERRACOTTA_WHITE);
-
     public static final WoodSet REDWOOD = createCompatWoodSet("redwood", CompatProperties.REDWOOD, () -> BOPBlocks.REDWOOD_PLANKS.get(), () -> BOPBlocks.REDWOOD_LOG.get(), () -> BOPBlocks.STRIPPED_REDWOOD_LOG.get(), () -> BOPBlocks.REDWOOD_LEAVES.get(), () -> BOPBlocks.REDWOOD_FENCE.get(), () -> BOPBlocks.REDWOOD_SLAB.get(), MapColor.TERRACOTTA_ORANGE);
-
     public static final WoodSet MAHOGANY = createCompatWoodSet("mahogany", CompatProperties.MAHOGANY, () -> BOPBlocks.MAHOGANY_PLANKS.get(), () -> BOPBlocks.MAHOGANY_LOG.get(), () -> BOPBlocks.STRIPPED_MAHOGANY_LOG.get(), () -> BOPBlocks.MAHOGANY_LEAVES.get(), () -> BOPBlocks.MAHOGANY_FENCE.get(), () -> BOPBlocks.MAHOGANY_SLAB.get(), MapColor.TERRACOTTA_PINK);
-
     public static final WoodSet WILLOW = createCompatWoodSet("willow", CompatProperties.WILLOW, () -> BOPBlocks.WILLOW_PLANKS.get(), () -> BOPBlocks.WILLOW_LOG.get(), () -> BOPBlocks.STRIPPED_WILLOW_LOG.get(), () -> BOPBlocks.WILLOW_LEAVES.get(), () -> BOPBlocks.WILLOW_FENCE.get(), () -> BOPBlocks.WILLOW_SLAB.get(), MapColor.TERRACOTTA_LIGHT_GREEN);
-
     public static final WoodSet MAGIC = createCompatWoodSet("magic", CompatProperties.MAGIC, () -> BOPBlocks.MAGIC_PLANKS.get(), () -> BOPBlocks.MAGIC_LOG.get(), () -> BOPBlocks.STRIPPED_MAGIC_LOG.get(), () -> BOPBlocks.MAGIC_LEAVES.get(), () -> BOPBlocks.MAGIC_FENCE.get(), () -> BOPBlocks.MAGIC_SLAB.get(), MapColor.COLOR_BLUE);
-
     public static final WoodSet DEAD = createCompatWoodSet("dead", CompatProperties.DEAD, () -> BOPBlocks.DEAD_PLANKS.get(), () -> BOPBlocks.DEAD_LOG.get(), () -> BOPBlocks.STRIPPED_DEAD_LOG.get(), () -> BOPBlocks.DEAD_LEAVES.get(), () -> BOPBlocks.DEAD_FENCE.get(), () -> BOPBlocks.DEAD_SLAB.get(), MapColor.STONE);
-
     public static final WoodSet UMBRAN = createCompatWoodSet("umbran", CompatProperties.UMBRAN, () -> BOPBlocks.UMBRAN_PLANKS.get(), () -> BOPBlocks.UMBRAN_LOG.get(), () -> BOPBlocks.STRIPPED_UMBRAN_LOG.get(), () -> BOPBlocks.UMBRAN_LEAVES.get(), () -> BOPBlocks.UMBRAN_FENCE.get(), () -> BOPBlocks.UMBRAN_SLAB.get(), MapColor.TERRACOTTA_BLUE);
-
     public static final WoodSet PALM = createCompatWoodSet("palm", CompatProperties.PALM, () -> BOPBlocks.PALM_PLANKS.get(), () -> BOPBlocks.PALM_LOG.get(), () -> BOPBlocks.STRIPPED_PALM_LOG.get(), () -> BOPBlocks.PALM_LEAVES.get(), () -> BOPBlocks.PALM_FENCE.get(), () -> BOPBlocks.PALM_SLAB.get(), MapColor.TERRACOTTA_YELLOW);
-
-    public static final WoodSet HELLBARK = createCompatUnburnableWoodSet("hellbark", CompatProperties.HELLBARK, () -> BOPBlocks.HELLBARK_PLANKS.get(), () -> BOPBlocks.HELLBARK_LOG.get(), () -> BOPBlocks.STRIPPED_HELLBARK_LOG.get(), () -> BOPBlocks.HELLBARK_LEAVES.get(), () -> BOPBlocks.HELLBARK_FENCE.get(), () -> BOPBlocks.HELLBARK_SLAB.get(), MapColor.TERRACOTTA_GRAY);
+    public static final WoodSet HELLBARK = createCompatUnburnableWoodSet("hellbark", CompatProperties.HELLBARK, () -> BOPBlocks.HELLBARK_PLANKS.get(), () -> BOPBlocks.HELLBARK_LOG.get(), () -> BOPBlocks.STRIPPED_HELLBARK_LOG.get(), () -> BOPBlocks.HELLBARK_LEAVES.get(), () -> BOPBlocks.HELLBARK_FENCE.get(), () -> BOPBlocks.HELLBARK_SLAB.get());
 
     //Sandstone Blocks
     public static final RegistryObject<Block> WHITE_SANDSTONE_VERTICAL_SLAB = HELPER.createBlock("white_sandstone_vertical_slab", () -> new VerticalSlabBlock(BOPBlocks.WHITE_SANDSTONE.get()));
@@ -145,12 +132,22 @@ public class CompatBlocks {
     public static LeafSet MAPLE = createCompatLeafSet("maple", CompatProperties.WILLOW, () -> BOPBlocks.MAPLE_LEAVES.get(), () -> Blocks.OAK_FENCE);
     public static LeafSet ORANGE_AUTUMN = createCompatLeafSet("orange_autumn", CompatProperties.WILLOW, () -> BOPBlocks.ORANGE_AUTUMN_LEAVES.get(), () -> Blocks.DARK_OAK_FENCE);
     public static LeafSet YELLOW_AUTUMN = createCompatLeafSet("yellow_autumn", CompatProperties.WILLOW, () -> BOPBlocks.YELLOW_AUTUMN_LEAVES.get(), () -> Blocks.BIRCH_FENCE);
+    public static LeafSet SNOW_BLOSSOM = createCompatLeafSet("snowblossom", CompatProperties.SNOW_BLOSSOM, () -> BOPBlocks.SNOWBLOSSOM_LEAVES.get(), () -> Blocks.CHERRY_FENCE);
+
+    public static Stream<WoodSet> woodSets() {
+        return Stream.of(JACARANDA, FIR, REDWOOD, MAHOGANY, WILLOW, MAGIC, DEAD, UMBRAN, PALM, HELLBARK);
+    }
+
+    public static Stream<LeafSet> leaveSets() {
+        return Stream.concat(Stream.of(FLOWERING_OAK, RAINBOW_BIRCH, ORIGIN, MAPLE, ORANGE_AUTUMN, YELLOW_AUTUMN, SNOW_BLOSSOM), woodSets().map(WoodSet::leaveSet));
+    }
 
     public static LeafSet createCompatLeafSet(String name, PropertyUtil.WoodSetProperties properties, Supplier<? extends Block> leaves, Supplier<? extends Block> fence) {
         var set = new LeafSet(
                 HELPER.createFuelBlock(name + "_hedge", () -> new HedgeBlock(null, null, fence.get(), leaves.get()), 300),
                 HELPER.createBlock(name + "_leaf_carpet", () -> new LeafCarpetBlock("", leaves.get(), null)),
-                HELPER.createBlock(name + "_leaf_pile", () -> new LeafPileBlock(properties.leafPile()))
+                HELPER.createBlock(name + "_leaf_pile", () -> new LeafPileBlock(properties.leafPile())),
+                fence
         );
 
         populateCreativeTabs(set, leaves);
@@ -182,8 +179,8 @@ public class CompatBlocks {
         return set;
     }
 
-    public static WoodSet createCompatUnburnableWoodSet(String name, PropertyUtil.WoodSetProperties properties, Supplier<? extends Block> planks, Supplier<? extends Block> log, Supplier<? extends Block> strippedLog, Supplier<? extends Block> leaves, Supplier<? extends Block> fence, Supplier<? extends Block> slab, MapColor color) {
-        var chests = HELPER.createUnburnableChestBlocks(name, color);
+    public static WoodSet createCompatUnburnableWoodSet(String name, PropertyUtil.WoodSetProperties properties, Supplier<? extends Block> planks, Supplier<? extends Block> log, Supplier<? extends Block> strippedLog, Supplier<? extends Block> leaves, Supplier<? extends Block> fence, Supplier<? extends Block> slab) {
+        var chests = HELPER.createUnburnableChestBlocks(name, properties.woodColor());
 
         var set = new WoodSet(
                 HELPER.createBlock(name + "_vertical_slab", () -> new VerticalSlabBlock(planks.get())),

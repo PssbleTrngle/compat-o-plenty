@@ -1,16 +1,33 @@
 package com.seleneandmana.compatoplenty.core.data.client;
 
+import com.seleneandmana.compatoplenty.common.blocks.VerticalSlabBlock;
 import com.seleneandmana.compatoplenty.core.CompatOPlenty;
 import com.seleneandmana.compatoplenty.core.registry.CompatBlocks;
+import com.teamabnormals.blueprint.common.block.LeafPileBlock;
+import net.mehvahdjukaar.vsc.temp.TempVerticalSlabBlock;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.violetmoon.quark.content.building.block.HedgeBlock;
+import org.violetmoon.quark.content.building.block.WoodPostBlock;
+import vectorwing.farmersdelight.common.block.CabinetBlock;
 
+import java.util.List;
+import java.util.Objects;
+
+import static com.seleneandmana.compatoplenty.core.CompatOPlenty.BLUEPRINT_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.BOP_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.QUARK_ID;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS;
 
 public class ModBlockModelsProvider extends BlockStateProvider {
 
@@ -20,40 +37,323 @@ public class ModBlockModelsProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        registerStatesAndModels(CompatBlocks.FIR);
-        registerStatesAndModels(CompatBlocks.JACARANDA);
-        registerStatesAndModels(CompatBlocks.REDWOOD);
-        registerStatesAndModels(CompatBlocks.MAHOGANY);
-        registerStatesAndModels(CompatBlocks.WILLOW);
-        registerStatesAndModels(CompatBlocks.MAGIC);
-        registerStatesAndModels(CompatBlocks.DEAD);
-        registerStatesAndModels(CompatBlocks.UMBRAN);
-        registerStatesAndModels(CompatBlocks.PALM);
-        registerStatesAndModels(CompatBlocks.RAINBOW_BIRCH);
-        registerStatesAndModels(CompatBlocks.ORANGE_AUTUMN);
-        registerStatesAndModels(CompatBlocks.YELLOW_AUTUMN);
-        registerStatesAndModels(CompatBlocks.MAPLE);
-        registerStatesAndModels(CompatBlocks.ORIGIN);
-        registerStatesAndModels(CompatBlocks.FLOWERING_OAK);
+        CompatBlocks.leaveSets().forEach(this::registerStatesAndModels);
+        CompatBlocks.woodSets().forEach(this::registerStatesAndModels);
     }
 
     private void registerStatesAndModels(CompatBlocks.LeafSet set) {
-
+        leafCarpet(set.leafCarpet().get());
+        leafPile(set.leafPile().get());
+        hedge(set.hedge().get(), key(set.fence().get()));
     }
 
     private void registerStatesAndModels(CompatBlocks.WoodSet set) {
         post(set.post().get());
         post(set.strippedPost().get());
+        verticalSlab(set.verticalSlab().get());
+        verticalPlanks(set.verticalPlanks().get());
+        boards(set.boards().get());
+        cabinet(set.cabinet().get());
+        bookshelf(set.bookshelf().get());
+        table(set.table().get());
+        chest(set.chest().get(), "chest");
+        chest(set.trappedChest().get(), "trapped_chest");
+        ladder(set.ladder().get());
+        beehive(set.beehive().get());
+    }
 
-        registerStatesAndModels(set.leaveSet());
+    private int rotationY(Direction direction) {
+        return switch (direction) {
+            case EAST -> 90;
+            case SOUTH -> 180;
+            case WEST -> 270;
+            default -> 0;
+        };
+    }
+
+    private ResourceLocation key(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
+    }
+
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ItemModelBuilder itemModel(Block block) {
+        return itemModels().withExistingParent(name(block), blockTexture(block));
+    }
+
+    private void bookshelf(Block block) {
+        var name = name(block);
+        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_bookshelf".length()) + "_planks");
+        simpleBlock(block, models().cubeColumn(name, key(block).withPrefix("block/"), texture));
+        itemModel(block);
+    }
+
+    private void cabinet(Block block) {
+        var name = name(block);
+
+        var texture = blockTexture(block);
+        var model = models().orientable(name, texture.withSuffix("_side"), texture.withSuffix("_front"), texture.withSuffix("_top"));
+        var modelOpen = models().orientable(name, texture.withSuffix("_side"), texture.withSuffix("_front_open"), texture.withSuffix("_top"));
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            var open = state.getValue(CabinetBlock.OPEN);
+            var facing = state.getValue(CabinetBlock.FACING);
+
+            return ConfiguredModel.builder()
+                    .modelFile(open ? modelOpen : model)
+                    .rotationY(rotationY(facing))
+                    .build();
+        });
+
+        itemModel(block);
+    }
+
+    private void leafPile(Block block) {
+        var name = name(block);
+        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_leaf_pile".length()) + "_leaves");
+
+        var model = models().singleTexture(name, new ResourceLocation(BLUEPRINT_ID, "block/leaf_pile"), "all", texture);
+
+        var builder = getMultipartBuilder(block);
+
+        PipeBlock.PROPERTY_BY_DIRECTION.forEach((direction, property) -> {
+            var rotationX = switch (direction) {
+                case DOWN -> 90;
+                case UP -> 270;
+                default -> 0;
+            };
+
+            var rotationY = switch (direction) {
+                case WEST -> 270;
+                case SOUTH -> 180;
+                case EAST -> 90;
+                default -> 0;
+            };
+
+            builder.part()
+                    .modelFile(model)
+                    .rotationY(rotationY)
+                    .rotationX(rotationX)
+                    .uvLock(true)
+                    .addModel()
+                    .condition(property, true);
+
+            var around = builder.part()
+                    .modelFile(model)
+                    .rotationY(rotationY)
+                    .rotationX(rotationX)
+                    .uvLock(true)
+                    .addModel();
+
+            PipeBlock.PROPERTY_BY_DIRECTION.values().forEach(it -> around.condition(it, false));
+        });
+
+        itemModels().singleTexture(name, new ResourceLocation("item/generated"), "layer0", texture);
+    }
+
+    private void leafCarpet(Block block) {
+        var name = name(block);
+        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_leaf_carpet".length()) + "_leaves");
+        simpleBlock(block, models().singleTexture(name, new ResourceLocation(QUARK_ID, "block/leaf_carpet"), "all", texture));
+        itemModel(block);
+    }
+
+    private void verticalPlanks(Block block) {
+        var name = name(block);
+        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring("vertical_".length()));
+        simpleBlock(block, models().singleTexture(name, new ResourceLocation(QUARK_ID, "block/vertical_planks"), "all", texture));
+        itemModel(block);
+    }
+
+    private void boards(RotatedPillarBlock block) {
+        var name = name(block);
+        var texture = blockTexture(block);
+        var model = models().singleTexture(name, new ResourceLocation(BLUEPRINT_ID, "block/template_boards"), "all", texture);
+        var modelHorizontal = models().singleTexture(name + "_horizontal", new ResourceLocation(BLUEPRINT_ID, "block/template_boards_horizontal"), "all", texture);
+        axisBlock(block, model, modelHorizontal);
+        itemModel(block);
+    }
+
+    private void verticalSlab(Block block) {
+        var name = name(block);
+        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_vertical_slab".length()) + "_planks");
+        var model = models().withExistingParent(name, new ResourceLocation(QUARK_ID, "block/vertical_slab"))
+                .texture("side", texture)
+                .texture("top", texture)
+                .texture("bottom", texture);
+
+        var planks = models().getExistingFile(texture);
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            var type = state.getValue(VerticalSlabBlock.TYPE);
+
+            if (type == TempVerticalSlabBlock.VerticalSlabType.DOUBLE) {
+                return ConfiguredModel.builder()
+                        .modelFile(planks)
+                        .build();
+            }
+
+            return ConfiguredModel.builder()
+                    .modelFile(model)
+                    .rotationY(rotationY(type.direction))
+                    .uvLock(true)
+                    .build();
+        });
+
+        itemModel(block);
     }
 
     private void post(Block block) {
-        var name = BuiltInRegistries.BLOCK.getKey(block).getPath();
-        var base = name.substring(0, name.length() - 5);
+        var name = name(block);
+        var texture = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - "_post".length()) + "_log");
 
-        models().singleTexture(name + "_connect", new ResourceLocation(QUARK_ID, "block/post_connect"), new ResourceLocation(BOP_ID, "block/" + base + "_log"));
-        models().singleTexture(name + "_connect_top", new ResourceLocation(QUARK_ID, "block/post_connect_top"), new ResourceLocation(BOP_ID, "block/" + base + "_log"));
+        var base = models().singleTexture(name, new ResourceLocation(QUARK_ID, "block/post"), texture);
+        var connect = models().singleTexture(name + "_connect", new ResourceLocation(QUARK_ID, "block/post_connect"), texture);
+        var connectTop = models().singleTexture(name + "_connect_top", new ResourceLocation(QUARK_ID, "block/post_connect_top"), texture);
+
+        var builder = getMultipartBuilder(block);
+
+        var chainSmall = models().getExistingFile(new ResourceLocation(QUARK_ID, "chain_small"));
+        var chainSmallTop = models().getExistingFile(new ResourceLocation(QUARK_ID, "chain_small_top"));
+
+        builder.part()
+                .modelFile(base)
+                .addModel()
+                .condition(AXIS, Direction.Axis.Y);
+
+        builder.part()
+                .modelFile(base)
+                .rotationX(90)
+                .rotationY(90)
+                .addModel()
+                .condition(AXIS, Direction.Axis.X);
+
+        builder.part()
+                .modelFile(base)
+                .rotationX(90)
+                .addModel()
+                .condition(AXIS, Direction.Axis.Z);
+
+        for (var side : WoodPostBlock.SIDES) {
+            var direction = Objects.requireNonNull(Direction.byName(side.getName().substring(8)));
+
+            var topModel = List.of(Direction.UP, Direction.NORTH, Direction.EAST).contains(direction);
+
+            var rotationX = direction.getAxis() == Direction.Axis.Y ? 0 : 90;
+            var rotationY = direction.getAxis() == Direction.Axis.X ? 90 : 0;
+
+            builder.part()
+                    .modelFile(topModel ? chainSmallTop : chainSmall)
+                    .rotationX(rotationX)
+                    .rotationY(rotationY)
+                    .addModel()
+                    .condition(side, WoodPostBlock.PostSideType.CHAIN);
+
+            builder.part()
+                    .modelFile(topModel ? connectTop : connect)
+                    .rotationX(rotationX)
+                    .rotationY(rotationY)
+                    .addModel()
+                    .condition(side, WoodPostBlock.PostSideType.OTHER_POST);
+        }
+
+        itemModel(block);
+    }
+
+    private void table(Block block) {
+        var name = name(block);
+        var texture = blockTexture(block);
+
+        var model = models().withExistingParent(name, new ResourceLocation(CompatOPlenty.MOD_ID, "block/table_template"))
+                .texture("side", texture)
+                .texture("top", texture.withSuffix("_top"))
+                .texture("bottom", texture.withSuffix("_bottom"));
+
+        horizontalBlock(block, model);
+        itemModel(block);
+    }
+
+    private void chest(Block block, String suffix) {
+        var name = name(block);
+        var particle = new ResourceLocation(BOP_ID, "block/" + name.substring(0, name.length() - suffix.length() - 1) + "_planks");
+        simpleBlock(block, models().getBuilder(name(block)).texture("particle", particle));
+        itemModels().withExistingParent(name(block), new ResourceLocation(BLUEPRINT_ID, "item/template_chest"));
+    }
+
+    private void ladder(Block block) {
+        var name = name(block);
+        var texture = blockTexture(block);
+
+        var model = models().withExistingParent(name, new ResourceLocation("block/ladder"))
+                .texture("texture", texture)
+                .texture("particle", texture);
+
+        horizontalBlock(block, model);
+        itemModels().singleTexture(name, new ResourceLocation("item/generated"), "layer0", blockTexture(block));
+    }
+
+    private void beehive(Block block) {
+        var name = name(block);
+        var texture = blockTexture(block);
+
+        var end = texture.withSuffix("_end");
+        var side = texture.withSuffix("_side");
+        var front = texture.withSuffix("_front");
+        var model = models().orientableWithBottom(name, side, front, end, end);
+        var modelHoney = models().orientableWithBottom(name + "_honey", side, front.withSuffix("_honey"), end, end);
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            var facing = state.getValue(BeehiveBlock.FACING);
+            var honey = state.getValue(BeehiveBlock.HONEY_LEVEL);
+
+            return ConfiguredModel.builder()
+                    .modelFile(honey == 5 ? modelHoney : model)
+                    .rotationY(rotationY(facing))
+                    .build();
+        });
+
+        itemModel(block);
+    }
+
+    private void hedge(Block block, ResourceLocation fence) {
+        var name = name(block);
+        var base = name.substring(0, name.length() - "_hedge".length());
+        var leaves = new ResourceLocation(BOP_ID, "block/" + base + "_leaves");
+        var log = new ResourceLocation(fence.getNamespace(), "block/" + fence.getPath().substring(0, fence.getPath().length() - "_fence".length()) + "_log");
+
+        var builder = getMultipartBuilder(block);
+
+        var extend = models().singleTexture(name + "_extend", new ResourceLocation(QUARK_ID, "block/hedge_extend"), "leaf", leaves);
+        var side = models().singleTexture(name + "_side", new ResourceLocation(QUARK_ID, "block/hedge_side"), "leaf", leaves);
+
+        var post = models().withExistingParent(name + "_post", new ResourceLocation(QUARK_ID, "block/hedge_post"))
+                .texture("log", log)
+                .texture("leaf", leaves);
+
+        builder.part()
+                .modelFile(post)
+                .addModel()
+                .condition(HedgeBlock.EXTEND, false);
+
+        builder.part()
+                .modelFile(extend)
+                .addModel()
+                .condition(HedgeBlock.EXTEND, true);
+
+        PipeBlock.PROPERTY_BY_DIRECTION.forEach((direction, property) -> {
+            if (direction.getAxis() == Direction.Axis.Y) return;
+
+            builder.part()
+                    .modelFile(side)
+                    .uvLock(true)
+                    .rotationY(rotationY(direction))
+                    .addModel()
+                    .condition(property, true);
+        });
+
+        itemModels().withExistingParent(name, new ResourceLocation(CompatOPlenty.MOD_ID, "block/" + name + "_post"));
     }
 
 }

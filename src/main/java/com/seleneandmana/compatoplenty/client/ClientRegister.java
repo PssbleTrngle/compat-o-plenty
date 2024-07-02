@@ -28,29 +28,10 @@ public class ClientRegister {
         ItemBlockRenderTypes.setRenderLayer(set.post().get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(set.strippedPost().get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(set.table().get(), RenderType.cutout());
-        setupRenderLayers(set.leaveSet());
     }
 
     public static void setupRenderLayer() {
-        // ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_HEDGE.get(), RenderType.cutout());
-        // ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_LEAF_CARPET.get(), RenderType.cutout());
-        // ItemBlockRenderTypes.setRenderLayer(CompatBlocks.WHITE_CHERRY_LEAF_PILE.get(), RenderType.cutout());
-
-        setupRenderLayers(CompatBlocks.JACARANDA);
-        setupRenderLayers(CompatBlocks.FIR);
-        setupRenderLayers(CompatBlocks.REDWOOD);
-        setupRenderLayers(CompatBlocks.MAHOGANY);
-        setupRenderLayers(CompatBlocks.WILLOW);
-        setupRenderLayers(CompatBlocks.MAGIC);
-        setupRenderLayers(CompatBlocks.DEAD);
-        setupRenderLayers(CompatBlocks.UMBRAN);
-        setupRenderLayers(CompatBlocks.PALM);
-        setupRenderLayers(CompatBlocks.HELLBARK);
-        setupRenderLayers(CompatBlocks.FLOWERING_OAK);
-        setupRenderLayers(CompatBlocks.RAINBOW_BIRCH);
-        setupRenderLayers(CompatBlocks.ORIGIN);
-        setupRenderLayers(CompatBlocks.MAPLE);
-        setupRenderLayers(CompatBlocks.ORANGE_AUTUMN);
-        setupRenderLayers(CompatBlocks.YELLOW_AUTUMN);
+        CompatBlocks.leaveSets().forEach(ClientRegister::setupRenderLayers);
+        CompatBlocks.woodSets().forEach(ClientRegister::setupRenderLayers);
     }
 }

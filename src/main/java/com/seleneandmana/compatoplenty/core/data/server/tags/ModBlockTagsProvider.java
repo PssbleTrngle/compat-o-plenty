@@ -9,6 +9,7 @@ import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock
 import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
@@ -25,13 +26,15 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     }
 
     private void add(CompatBlocks.LeafSet set) {
+        var hedgeTag = BlockTags.create(new ResourceLocation(CompatOPlenty.QUARK_ID, "hedges"));
+
         tag(BlockTags.MINEABLE_WITH_AXE).add(set.hedge().get());
         tag(BlockTags.MINEABLE_WITH_HOE).add(set.leafPile().get(), set.leafCarpet().get());
         tag(BlueprintBlockTags.LEAF_PILES).add(set.leafPile().get());
+        tag(hedgeTag).add(set.hedge().get());
     }
 
     private void add(CompatBlocks.WoodSet set) {
-        add(set.leaveSet());
         tag(BlockTags.MINEABLE_WITH_AXE).add(
                 set.verticalSlab().get(),
                 set.bookshelf().get(),
@@ -56,21 +59,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        add(CompatBlocks.FIR);
-        add(CompatBlocks.JACARANDA);
-        add(CompatBlocks.REDWOOD);
-        add(CompatBlocks.MAHOGANY);
-        add(CompatBlocks.WILLOW);
-        add(CompatBlocks.MAGIC);
-        add(CompatBlocks.DEAD);
-        add(CompatBlocks.UMBRAN);
-        add(CompatBlocks.PALM);
-        add(CompatBlocks.RAINBOW_BIRCH);
-        add(CompatBlocks.ORANGE_AUTUMN);
-        add(CompatBlocks.YELLOW_AUTUMN);
-        add(CompatBlocks.MAPLE);
-        add(CompatBlocks.ORIGIN);
-        add(CompatBlocks.FLOWERING_OAK);
+        CompatBlocks.woodSets().forEach(this::add);
+        CompatBlocks.leaveSets().forEach(this::add);
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 CompatBlocks.BLACK_SANDSTONE_VERTICAL_SLAB.get(),

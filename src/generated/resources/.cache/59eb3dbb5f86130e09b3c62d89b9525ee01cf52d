@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-01T23:02:07.6520981	Loot Tables
+// 1.20.1	2024-07-02T11:43:15.2506803	Loot Tables
 805109e1597a097fadeed439632c92ff283b8882 data/compatoplenty/loot_tables/blocks/black_sandstone_bricks.json
 fdf822d67b2e03a4361a65c2fdc05bb7f87fba12 data/compatoplenty/loot_tables/blocks/black_sandstone_brick_slab.json
 08ead8218fbeb7277077f33b9720d6157d89ab01 data/compatoplenty/loot_tables/blocks/black_sandstone_brick_stairs.json
@@ -152,6 +152,9 @@ e5efccf2bd72ca57cde8646d36bd113f8eb8d8db data/compatoplenty/loot_tables/blocks/r
 e8d479efa6a94ba98f974b3aedfa517062aed4d1 data/compatoplenty/loot_tables/blocks/smooth_black_sandstone_vertical_slab.json
 6f7a38cb9dc330fede22f443c17db42ad97944ff data/compatoplenty/loot_tables/blocks/smooth_orange_sandstone_vertical_slab.json
 cad98069ff741766ba685e9af9713a74e5737b05 data/compatoplenty/loot_tables/blocks/smooth_white_sandstone_vertical_slab.json
+4cef2fb933cb0bbf1c562a5cd9daf5b1ceb74158 data/compatoplenty/loot_tables/blocks/snowblossom_hedge.json
+db5b3f0c1f1c7fcbb1f735f6314ff2f1670663fe data/compatoplenty/loot_tables/blocks/snowblossom_leaf_carpet.json
+2223b403a11a6f3dbf44f1516d640f7306b77e60 data/compatoplenty/loot_tables/blocks/snowblossom_leaf_pile.json
 2d9b1c479a7a3610d01a15c538e788d43eb4a778 data/compatoplenty/loot_tables/blocks/stripped_dead_post.json
 e538a41273cfaf37278cc54adf1d9132c2992d4c data/compatoplenty/loot_tables/blocks/stripped_fir_post.json
 956ced2b3b3132cc7bdc8d7d79d3b5d18b4cfb5c data/compatoplenty/loot_tables/blocks/stripped_hellbark_post.json

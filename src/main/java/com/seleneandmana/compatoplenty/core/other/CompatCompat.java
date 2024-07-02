@@ -32,38 +32,11 @@ public class CompatCompat {
     }
 
     public static void flammability() {
-        registerFlammables(CompatBlocks.FIR);
-        registerFlammables(CompatBlocks.JACARANDA);
-        registerFlammables(CompatBlocks.REDWOOD);
-        registerFlammables(CompatBlocks.MAHOGANY);
-        registerFlammables(CompatBlocks.WILLOW);
-        registerFlammables(CompatBlocks.MAGIC);
-        registerFlammables(CompatBlocks.DEAD);
-        registerFlammables(CompatBlocks.UMBRAN);
-        registerFlammables(CompatBlocks.PALM);
-        registerFlammables(CompatBlocks.RAINBOW_BIRCH);
-        registerFlammables(CompatBlocks.ORANGE_AUTUMN);
-        registerFlammables(CompatBlocks.YELLOW_AUTUMN);
-        registerFlammables(CompatBlocks.MAPLE);
-        registerFlammables(CompatBlocks.ORIGIN);
-        registerFlammables(CompatBlocks.FLOWERING_OAK);
+        CompatBlocks.woodSets().forEach(CompatCompat::registerFlammables);
+        CompatBlocks.leaveSets().forEach(CompatCompat::registerFlammables);
     }
 
     public static void compostablility() {
-        registerCompostables(CompatBlocks.FIR.leaveSet());
-        registerCompostables(CompatBlocks.JACARANDA.leaveSet());
-        registerCompostables(CompatBlocks.REDWOOD.leaveSet());
-        registerCompostables(CompatBlocks.MAHOGANY.leaveSet());
-        registerCompostables(CompatBlocks.WILLOW.leaveSet());
-        registerCompostables(CompatBlocks.MAGIC.leaveSet());
-        registerCompostables(CompatBlocks.DEAD.leaveSet());
-        registerCompostables(CompatBlocks.UMBRAN.leaveSet());
-        registerCompostables(CompatBlocks.PALM.leaveSet());
-        registerCompostables(CompatBlocks.RAINBOW_BIRCH);
-        registerCompostables(CompatBlocks.ORANGE_AUTUMN);
-        registerCompostables(CompatBlocks.YELLOW_AUTUMN);
-        registerCompostables(CompatBlocks.MAPLE);
-        registerCompostables(CompatBlocks.ORIGIN);
-        registerCompostables(CompatBlocks.FLOWERING_OAK);
+        CompatBlocks.leaveSets().forEach(CompatCompat::registerCompostables);
     }
 }

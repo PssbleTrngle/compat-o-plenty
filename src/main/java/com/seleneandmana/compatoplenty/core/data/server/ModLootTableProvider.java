@@ -1,6 +1,7 @@
 package com.seleneandmana.compatoplenty.core.data.server;
 
 import com.google.common.collect.ImmutableList;
+import com.seleneandmana.compatoplenty.client.ClientRegister;
 import com.seleneandmana.compatoplenty.core.registry.CompatBlocks;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
@@ -61,7 +62,6 @@ public class ModLootTableProvider extends LootTableProvider {
             this.dropSelf(set.table().get());
             this.dropSelf(set.boards().get());
             this.dropSelf(set.verticalPlanks().get());
-            this.add(set.leaveSet());
         }
 
         @Override
@@ -84,22 +84,8 @@ public class ModLootTableProvider extends LootTableProvider {
             this.add(CompatBlocks.POLISHED_ROSE_QUARTZ_BRICK_VERTICAL_SLAB.get(), this::createSlabItemTable);
 
             //Block Sets
-            this.add(CompatBlocks.JACARANDA);
-            this.add(CompatBlocks.FIR);
-            this.add(CompatBlocks.REDWOOD);
-            this.add(CompatBlocks.MAHOGANY);
-            this.add(CompatBlocks.WILLOW);
-            this.add(CompatBlocks.MAGIC);
-            this.add(CompatBlocks.DEAD);
-            this.add(CompatBlocks.UMBRAN);
-            this.add(CompatBlocks.PALM);
-            this.add(CompatBlocks.HELLBARK);
-            this.add(CompatBlocks.FLOWERING_OAK);
-            this.add(CompatBlocks.RAINBOW_BIRCH);
-            this.add(CompatBlocks.ORIGIN);
-            this.add(CompatBlocks.MAPLE);
-            this.add(CompatBlocks.YELLOW_AUTUMN);
-            this.add(CompatBlocks.ORANGE_AUTUMN);
+            CompatBlocks.leaveSets().forEach(this::add);
+            CompatBlocks.woodSets().forEach(this::add);
 
             //Sandstone Bricks
             this.dropSelf(CompatBlocks.WHITE_SANDSTONE_BRICKS.get());
