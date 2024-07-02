@@ -50,21 +50,24 @@ public class CompatItems {
     public static final RegistryObject<Item> LARGE_PALM_BOAT = HELPER.createItem("large_palm_boat", ItemSubRegistryHelper.areModsLoaded(BOATLOAD_ID) ? CompatBoatTypes.LARGE_PALM_BOAT : () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LARGE_HELLBARK_BOAT = HELPER.createItem("large_hellbark_boat", ItemSubRegistryHelper.areModsLoaded(BOATLOAD_ID) ? CompatBoatTypes.LARGE_HELLBARK_BOAT : () -> new Item(new Item.Properties()));
 
-    public static Predicate<ItemStack> of(Supplier<? extends ItemLike> item) {
+    static Predicate<ItemStack> of(Supplier<? extends ItemLike> item) {
         return it -> it.is(item.get().asItem());
     }
 
-    public static Predicate<ItemStack> of(ItemLike item) {
+    static Predicate<ItemStack> of(ItemLike item) {
         return it -> it.is(item.asItem());
     }
 
-    public static Predicate<ItemStack> anyModLoaded(String... modIds) {
+    static Predicate<ItemStack> anyModLoaded(String... modIds) {
         return $ -> Arrays.stream(modIds).anyMatch(BlockSubRegistryHelper::areModsLoaded);
     }
 
+    static final CreativeModeTabContentsPopulator.Entry TAB_POPULATOR = CreativeModeTabContentsPopulator
+            .mod(CompatOPlenty.MOD_ID)
+            .predicate($ -> true);
+
     static {
-        CreativeModeTabContentsPopulator.mod(CompatOPlenty.MOD_ID)
-                .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
+        TAB_POPULATOR
                 .addItemsAfter(of(Items.CHERRY_BOAT).and(anyModLoaded(BOATLOAD_ID)),
                         JACARANDA_FURNACE_BOAT,
                         LARGE_JACARANDA_BOAT,
@@ -87,7 +90,6 @@ public class CompatItems {
                         HELLBARK_FURNACE_BOAT,
                         LARGE_HELLBARK_BOAT
                 )
-                .tab(CreativeModeTabs.INGREDIENTS)
                 .addItemsAfter(of(Items.CLAY_BALL).and(anyModLoaded(QUARK_ID)), GLOWING_MOSS_PASTE);
     }
 

@@ -37,6 +37,7 @@ import static com.seleneandmana.compatoplenty.core.CompatOPlenty.QUARK_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.TWIGS_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.VSLAB_ID;
 import static com.seleneandmana.compatoplenty.core.CompatOPlenty.WOODWORKS_ID;
+import static com.seleneandmana.compatoplenty.core.registry.CompatItems.TAB_POPULATOR;
 import static com.seleneandmana.compatoplenty.core.registry.CompatItems.anyModLoaded;
 import static com.seleneandmana.compatoplenty.core.registry.CompatItems.of;
 
@@ -203,10 +204,8 @@ public class CompatBlocks {
         return set;
     }
 
-
     public static void populateCreativeTabs(WoodSet set, Supplier<? extends ItemLike> planks, Supplier<? extends ItemLike> slab) {
-        CreativeModeTabContentsPopulator.mod(CompatOPlenty.MOD_ID)
-                .predicate($ -> true)
+        TAB_POPULATOR
                 .addItemsAfter(of(slab).and(anyModLoaded(VSLAB_ID, QUARK_ID)), set.verticalSlab())
                 .addItemsAfter(of(Items.BOOKSHELF).and(anyModLoaded(WOODWORKS_ID, QUARK_ID)), set.bookshelf())
                 .addItemsAfter(of(Items.LADDER).and(anyModLoaded(WOODWORKS_ID, QUARK_ID)), set.ladder())
@@ -222,16 +221,14 @@ public class CompatBlocks {
     }
 
     public static void populateCreativeTabs(LeafSet set, Supplier<? extends ItemLike> leaves) {
-        CreativeModeTabContentsPopulator.mod(CompatOPlenty.MOD_ID)
-                .predicate($ -> true)
-                .addItemsAfter(of(Items.OAK_LEAVES).and(anyModLoaded(QUARK_ID)), set.hedge())
-                .addItemsAfter(of(Items.OAK_LEAVES).and(anyModLoaded(QUARK_ID)), set.leafCarpet())
-                .addItemsAfter(of(Items.OAK_LEAVES), set.leafPile());
+        TAB_POPULATOR
+                .addItemsAfter(of(leaves).and(anyModLoaded(QUARK_ID)), set.hedge())
+                .addItemsAfter(of(leaves).and(anyModLoaded(QUARK_ID)), set.leafCarpet())
+                .addItemsAfter(of(leaves), set.leafPile());
     }
 
     static {
         CreativeModeTabContentsPopulator.mod(CompatOPlenty.MOD_ID)
-                .predicate($ -> true)
                 .addItemsAfter(of(() -> BOPBlocks.WHITE_SANDSTONE_SLAB.get()), WHITE_SANDSTONE_VERTICAL_SLAB)
                 .addItemsAfter(of(() -> BOPBlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get()), SMOOTH_WHITE_SANDSTONE_VERTICAL_SLAB)
                 .addItemsAfter(of(() -> BOPBlocks.CUT_WHITE_SANDSTONE_SLAB.get()),

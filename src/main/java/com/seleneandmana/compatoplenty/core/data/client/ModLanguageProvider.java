@@ -24,8 +24,8 @@ public class ModLanguageProvider extends LanguageProvider {
         add(set.post().get(), name + " Post");
         add(set.table().get(), name + " Table");
         add(set.beehive().get(), name + " Beehive");
-        add(set.cabinet().get(), name + "Cabinet");
-        add(set.boards().get(), name + "Boards");
+        add(set.cabinet().get(), name + " Cabinet");
+        add(set.boards().get(), name + " Boards");
         add(set.chest().get(), name + " Chest");
         add(set.trappedChest().get(), name + " Trapped Chest");
         add(set.strippedPost().get(), "Stripped " + name + " Post");
