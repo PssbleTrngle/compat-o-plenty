@@ -1,10 +1,9 @@
 package com.seleneandmana.compatoplenty.core.registry;
 
-import com.seleneandmana.compatoplenty.integrations.boatload.CompatBoatTypes;
+import com.seleneandmana.compatoplenty.integrations.CompatBoatTypes;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -50,15 +49,15 @@ public class CompatItems {
     public static final RegistryObject<Item> LARGE_PALM_BOAT = HELPER.createItem("large_palm_boat", ItemSubRegistryHelper.areModsLoaded(BOATLOAD_ID) ? CompatBoatTypes.LARGE_PALM_BOAT : () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LARGE_HELLBARK_BOAT = HELPER.createItem("large_hellbark_boat", ItemSubRegistryHelper.areModsLoaded(BOATLOAD_ID) ? CompatBoatTypes.LARGE_HELLBARK_BOAT : () -> new Item(new Item.Properties()));
 
-    static Predicate<ItemStack> of(Supplier<? extends ItemLike> item) {
+    public static Predicate<ItemStack> of(Supplier<? extends ItemLike> item) {
         return it -> it.is(item.get().asItem());
     }
 
-    static Predicate<ItemStack> of(ItemLike item) {
+    public static Predicate<ItemStack> of(ItemLike item) {
         return it -> it.is(item.asItem());
     }
 
-    static Predicate<ItemStack> anyModLoaded(String... modIds) {
+    public static Predicate<ItemStack> anyModLoaded(String... modIds) {
         return $ -> Arrays.stream(modIds).anyMatch(BlockSubRegistryHelper::areModsLoaded);
     }
 

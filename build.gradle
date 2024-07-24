@@ -58,7 +58,7 @@ dependencies {
     implementation fg.deobf("com.teamabnormals:boatload:1.20.1-5.0.1")
     implementation fg.deobf("curse.maven:woodworks-543610:5292418")
     implementation fg.deobf("curse.maven:clayworks-592162:5302012")
-    implementation fg.deobf("curse.maven:vertical-slabs-compat-724387:5022329")
+    compileOnly fg.deobf("curse.maven:vertical-slabs-compat-724387:5022329")
     implementation fg.deobf("curse.maven:selene-499980:5478857")
     implementation fg.deobf("curse.maven:quark-243121:5418252")
     implementation fg.deobf("curse.maven:zeta-968868:5418213")

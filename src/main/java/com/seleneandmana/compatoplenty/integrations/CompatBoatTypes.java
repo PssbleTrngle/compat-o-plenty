@@ -1,4 +1,4 @@
-package com.seleneandmana.compatoplenty.integrations.boatload;
+package com.seleneandmana.compatoplenty.integrations;
 
 import biomesoplenty.api.block.BOPBlocks;
 import biomesoplenty.api.item.BOPItems;

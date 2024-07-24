@@ -4,8 +4,17 @@
     {
       "conditions": [
         {
-          "type": "forge:mod_loaded",
-          "modid": "v_slab_compat"
+          "type": "forge:or",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "v_slab_compat"
+            },
+            {
+              "type": "forge:mod_loaded",
+              "modid": "quark"
+            }
+          ]
         }
       ],
       "recipe": {

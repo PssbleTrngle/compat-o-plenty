@@ -28,6 +28,7 @@ import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.AndCondition;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.common.crafting.conditions.OrCondition;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -447,7 +448,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private static ICondition vslabCondition() {
-        return new ModLoadedCondition(VSLAB_ID);
+        return new OrCondition(new ModLoadedCondition(VSLAB_ID), quarkFlagCondition("vertical_slabs"));
     }
 
     private static ICondition quarkFlagCondition(String flag) {
@@ -469,12 +470,12 @@ public class ModRecipeProvider extends RecipeProvider {
 
     public static void verticalPlankRecipe(ItemLike plank, ItemLike verticalPlank, Consumer<FinishedRecipe> consumer) {
         ConditionalRecipe.builder()
-                .addCondition(vslabCondition())
+                .addCondition(quarkFlagCondition("vertical_planks"))
                 .addRecipe(consumer1 -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, verticalPlank, 3).define('S', plank).pattern("S").pattern("S").pattern("S").unlockedBy(getHasName(plank), has(plank)).save(consumer1, new ResourceLocation(CompatOPlenty.MOD_ID, getItemName(verticalPlank))))
                 .build(consumer, new ResourceLocation(CompatOPlenty.MOD_ID, "crafting/" + getItemName(verticalPlank)));
 
         ConditionalRecipe.builder()
-                .addCondition(new ModLoadedCondition(VSLAB_ID))
+                .addCondition(quarkFlagCondition("vertical_planks"))
                 .addRecipe(consumer1 -> ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, plank).requires(verticalPlank).unlockedBy(getHasName(verticalPlank), has(verticalPlank)).save(consumer1, new ResourceLocation(CompatOPlenty.MOD_ID, getItemName(verticalPlank) + "_revert")))
                 .build(consumer, new ResourceLocation(CompatOPlenty.MOD_ID, "crafting/" + getItemName(verticalPlank) + "_revert"));
     }

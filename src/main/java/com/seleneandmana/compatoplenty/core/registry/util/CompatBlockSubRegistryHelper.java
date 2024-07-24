@@ -1,6 +1,7 @@
 package com.seleneandmana.compatoplenty.core.registry.util;
 
 import com.mojang.datafixers.util.Pair;
+import com.seleneandmana.compatoplenty.core.TriFunction;
 import com.teamabnormals.blueprint.client.BlueprintChestMaterials;
 import com.teamabnormals.blueprint.client.renderer.block.ChestBlockEntityWithoutLevelRenderer;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
@@ -20,7 +21,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.RegistryObject;
-import org.violetmoon.quark.base.util.TriFunction;
 
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
