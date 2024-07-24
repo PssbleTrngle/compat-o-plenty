@@ -1,7 +1,6 @@
 package com.seleneandmana.compatoplenty.core.data.client;
 
 import biomesoplenty.api.block.BOPBlocks;
-import com.seleneandmana.compatoplenty.common.blocks.VerticalSlabBlock;
 import com.seleneandmana.compatoplenty.core.CompatOPlenty;
 import com.seleneandmana.compatoplenty.core.registry.CompatBlocks;
 import net.mehvahdjukaar.vsc.temp.TempVerticalSlabBlock;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -22,6 +20,7 @@ import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.violetmoon.quark.content.building.block.HedgeBlock;
+import org.violetmoon.quark.content.building.block.VerticalSlabBlock;
 import org.violetmoon.quark.content.building.block.WoodPostBlock;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 
@@ -217,7 +216,7 @@ public class ModBlockModelsProvider extends BlockStateProvider {
         getVariantBuilder(block).forAllStatesExcept(state -> {
             var type = state.getValue(VerticalSlabBlock.TYPE);
 
-            if (type == TempVerticalSlabBlock.VerticalSlabType.DOUBLE) {
+            if (type == VerticalSlabBlock.VerticalSlabType.DOUBLE) {
                 return ConfiguredModel.builder()
                         .modelFile(planks)
                         .build();

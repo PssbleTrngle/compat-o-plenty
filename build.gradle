@@ -25,44 +25,20 @@ minecraft {
     mappings channel: 'parchment', version: '2023.09.03-1.20.1'
 
     runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            mods {
-                compatoplenty {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            mods {
-                compatoplenty {
-                    source sourceSets.main
-                }
-            }
-        }
-
+        client {}
+        server {}
         data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
             args '--mod', 'compatoplenty', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'biomesoplenty', '--existing-mod', 'quark', '--existing-mod', 'blueprint'
+        }
 
-            mods {
+        forEach {
+            it.workingDirectory project.file('run')
+            it.property 'forge.logging.markers', 'REGISTRIES'
+            it.property 'forge.logging.console.level', 'debug'
+            it.property 'mixin.env.remapRefMap', 'true'
+            it.property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            it.mods {
                 compatoplenty {
                     source sourceSets.main
                 }
@@ -102,6 +78,17 @@ repositories {
     }
     maven {
         url "https://maven.jaackson.me"
+    }
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property("version", version)
+
+    filesMatching('META-INF/mods.toml') {
+        expand(
+                version: version,
+        )
     }
 }
 

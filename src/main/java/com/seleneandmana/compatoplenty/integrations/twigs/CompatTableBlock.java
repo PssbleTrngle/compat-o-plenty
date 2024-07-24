@@ -33,7 +33,7 @@ public class CompatTableBlock extends HorizontalDirectionalBlock implements Simp
 
     public CompatTableBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
@@ -48,11 +48,11 @@ public class CompatTableBlock extends HorizontalDirectionalBlock implements Simp
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         FluidState fluidstate = ctx.getLevel().getFluidState(ctx.getClickedPos());
         boolean flag = fluidstate.getType() == Fluids.WATER;
-        return (BlockState)super.getStateForPlacement(ctx).setValue(WATERLOGGED, flag);
+        return super.getStateForPlacement(ctx).setValue(WATERLOGGED, flag);
     }
 
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
-        if ((Boolean)state.getValue(WATERLOGGED)) {
+        if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
@@ -60,11 +60,11 @@ public class CompatTableBlock extends HorizontalDirectionalBlock implements Simp
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{WATERLOGGED, FACING});
+        builder.add(WATERLOGGED, FACING);
     }
 
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     static {

@@ -5,7 +5,7 @@ license="Apache-2.0"
 [[mods]]
 modId="compatoplenty"
 authors = "Selene and Mana"
-version="${file.jarVersion}"
+version="${version}"
 displayName="Compat O' Plenty"
 logoFile="logo.png"
 description='''
