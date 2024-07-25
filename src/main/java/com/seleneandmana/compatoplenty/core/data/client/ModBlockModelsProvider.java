@@ -119,7 +119,7 @@ public class ModBlockModelsProvider extends BlockStateProvider {
 
         var texture = blockTexture(block);
         var model = models().orientable(name, texture.withSuffix("_side"), texture.withSuffix("_front"), texture.withSuffix("_top"));
-        var modelOpen = models().orientable(name, texture.withSuffix("_side"), texture.withSuffix("_front_open"), texture.withSuffix("_top"));
+        var modelOpen = models().orientable(name + "_open", texture.withSuffix("_side"), texture.withSuffix("_front_open"), texture.withSuffix("_top"));
 
         getVariantBuilder(block).forAllStatesExcept(state -> {
             var open = state.getValue(CabinetBlock.OPEN);

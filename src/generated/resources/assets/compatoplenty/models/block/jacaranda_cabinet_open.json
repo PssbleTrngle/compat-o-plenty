@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "front": "compatoplenty:block/jacaranda_cabinet_front",
+    "front": "compatoplenty:block/jacaranda_cabinet_front_open",
     "side": "compatoplenty:block/jacaranda_cabinet_side",
     "top": "compatoplenty:block/jacaranda_cabinet_top"
   }
